@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naissen Chebbi — AI & Data Science Engineering</title>
+<meta name="description" content="Portfolio of Naissen Chebbi, AI and Data Science engineering student.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#17101F;--bg2:#211630;--card:rgba(255,255,255,.05);--border:rgba(201,182,255,.18);--text:#E9DFF5;--muted:#B9A9C9;--p1:#9B72CF;--p2:#E7A4D7;--p3:#C9B6FF;--glow:rgba(155,114,207,.35)}
+:root.light{--bg:#F8F4FF;--bg2:#EFE6FB;--card:rgba(255,255,255,.75);--border:rgba(155,114,207,.25);--text:#17101F;--muted:#5E4E75;--p1:#7D52B8;--p2:#C4609F;--p3:#9B72CF;--glow:rgba(155,114,207,.25)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;transition:background .4s,color .4s}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(600px 400px at 85% 8%,var(--glow),transparent 70%),radial-gradient(500px 400px at 5% 60%,rgba(231,164,215,.14),transparent 70%)}
+main,header,footer{position:relative;z-index:1}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;left:0;right:0;z-index:10;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 70%,transparent);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:700;font-size:1.15rem;background:linear-gradient(90deg,var(--p3),var(--p2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.links{display:flex;gap:26px;align-items:center}
+.links a{font-size:.92rem;color:var(--muted);transition:color .2s}
+.links a:hover{color:var(--p2)}
+#theme{background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:1rem}
+section{padding:100px 0}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--p2);margin-bottom:10px}
+h2{font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:36px;line-height:1.2}
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:110px}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,7vw,4.8rem);line-height:1.05;margin:10px 0 18px}
+.grad{background:linear-gradient(90deg,var(--p3),var(--p2),var(--p1));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{color:var(--muted);font-size:1.12rem;max-width:520px;margin-bottom:30px}
+.typing{font-family:'JetBrains Mono',monospace;color:var(--p2);min-height:1.6em;margin-bottom:18px}
+.typing::after{content:"▍";animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{padding:13px 26px;border-radius:999px;font-weight:500;border:1px solid var(--border);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn.primary{background:linear-gradient(90deg,var(--p1),var(--p2));color:#fff;border:none;box-shadow:0 8px 28px var(--glow)}
+.photo{position:relative;width:min(340px,80%);aspect-ratio:1;margin:0 auto}
+.photo::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(from 0deg,var(--p1),var(--p2),var(--p3),var(--p1));animation:spin 8s linear infinite;filter:blur(2px)}
+.photo img{position:relative;width:100%;height:100%;object-fit:cover;border-radius:50%;border:6px solid var(--bg);background:var(--bg2)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.grid{display:grid;gap:22px}
+.about{grid-template-columns:1.4fr 1fr}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;backdrop-filter:blur(8px);transition:transform .3s,border-color .3s,box-shadow .3s}
+.card:hover{transform:translateY(-6px);border-color:var(--p2);box-shadow:0 18px 40px var(--glow)}
+.card p{color:var(--muted)}
+.facts{list-style:none;display:grid;gap:14px}
+.facts li{display:flex;gap:12px;color:var(--muted)}
+.facts b{color:var(--text);display:block}
+.projects{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.card h3{margin:6px 0 10px;font-size:1.25rem}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:4px 11px;border-radius:999px;background:rgba(155,114,207,.16);color:var(--p3);border:1px solid var(--border)}
+:root.light .tag{color:var(--p1)}
+.card .more{color:var(--p2);font-weight:500;font-size:.92rem}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.skills h3{font-size:1rem;color:var(--p2);margin-bottom:14px}
+.skills .tags{margin:0}
+.contact{text-align:center}
+.contact p{color:var(--muted);max-width:520px;margin:0 auto 28px}
+footer{text-align:center;padding:36px 0;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
+.reveal.show{opacity:1;transform:none}
+@media(max-width:820px){.hero .wrap,.about{grid-template-columns:1fr}.photo{order:-1;width:min(240px,70%)}.links a:not(#theme){display:none}section{padding:70px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+
+<nav><div class="wrap">
+  <a href="#home" class="logo">NC.</a>
+  <div class="links">
+    <a href="#about">About</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+    <button id="theme" aria-label="Toggle theme">🌙</button>
+  </div>
+</div></nav>
+
+<header id="home" class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">AI &amp; Data Science Engineering</div>
+    <h1>Hi, I'm <span class="grad">Naissen Chebbi</span></h1>
+    <div class="typing" id="typing"></div>
+    <p class="lead">Engineering student passionate about building intelligent applications — from language processing and retrieval to model development and deployment.</p>
+    <div class="btns">
+      <a href="#projects" class="btn primary">View my projects</a>
+      <a href="#contact" class="btn">Contact me</a>
+    </div>
+  </div>
+  <div class="photo"><img src="photo.jpg" alt="Naissen Chebbi"></div>
+</div></header>
+
+<main>
+<section id="about"><div class="wrap">
+  <div class="eyebrow">01 — About</div><h2>Learn, experiment, <span class="grad">build, improve</span></h2>
+  <div class="grid about reveal">
+    <div class="card">
+      <p>I'm a second-year engineering student at <b>École Polytechnique de Sousse</b>, specializing in Computer Science, AI and Data. I'm interested in NLP, LLMs, RAG systems, Machine Learning and MLOps, and I enjoy turning ideas into useful projects while strengthening my technical foundations.</p>
+      <p style="margin-top:14px">I also gained industry experience at <b>LEONI Tunisie</b>, which taught me how engineering works in a real production environment.</p>
+    </div>
+    <div class="card"><ul class="facts">
+      <li>🎓<span><b>Education</b>École Polytechnique de Sousse</span></li>
+      <li>🧠<span><b>Focus</b>NLP · LLMs · RAG · MLOps</span></li>
+      <li>🏭<span><b>Experience</b>LEONI Tunisie</span></li>
+      <li>📍<span><b>Based in</b>Tunisia</span></li>
+    </ul></div>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <div class="eyebrow">02 — Projects</div><h2>Things I've <span class="grad">built</span></h2>
+  <div class="grid projects">
+    <article class="card reveal">
+      <div class="eyebrow" style="margin:0">AI · LLM</div>
+      <h3>Multi-LLM Chatbot</h3>
+      <p>A Streamlit chatbot that talks to several language models, local and cloud, with conversational memory.</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">Ollama</span><span class="tag">Groq</span></div>
+      <a class="more" href="https://github.com/naissenchebbi" target="_blank" rel="noopener">View repository →</a>
+    </article>
+    <article class="card reveal">
+      <div class="eyebrow" style="margin:0">Full-stack</div>
+      <h3>MERN Auth API</h3>
+      <p>A REST API with JWT authentication, user and article collections, built with Express and MongoDB.</p>
+      <div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MongoDB</span><span class="tag">JWT</span></div>
+      <a class="more" href="https://github.com/naissenchebbi" target="_blank" rel="noopener">View repository →</a>
+    </article>
+    <article class="card reveal">
+      <div class="eyebrow" style="margin:0">Web · Brand</div>
+      <h3>Lamsa (لمسة)</h3>
+      <p>Branding and web presence for an event planning and luxury gifting brand.</p>
+      <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Branding</span></div>
+      <a class="more" href="https://github.com/naissenchebbi" target="_blank" rel="noopener">View project →</a>
+    </article>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <div class="eyebrow">03 — Skills</div><h2>My <span class="grad">toolbox</span></h2>
+  <div class="skills">
+    <div class="card reveal"><h3>Languages</h3><div class="tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C / C++</span><span class="tag">JavaScript</span><span class="tag">HTML / CSS</span></div></div>
+    <div class="card reveal"><h3>AI &amp; Data</h3><div class="tags"><span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">scikit-learn</span><span class="tag">OpenCV</span><span class="tag">NLP · RAG</span></div></div>
+    <div class="card reveal"><h3>Tools &amp; Deployment</h3><div class="tags"><span class="tag">Git / GitHub</span><span class="tag">Docker</span><span class="tag">Linux</span><span class="tag">Flask</span><span class="tag">FastAPI</span></div></div>
+  </div>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap">
+  <div class="eyebrow">04 — Contact</div><h2>Let's <span class="grad">connect</span></h2>
+  <p>Open to internships, collaborations and interesting AI projects. Feel free to reach out.</p>
+  <div class="btns" style="justify-content:center">
+    <a class="btn primary" href="mailto:your.email@example.com">Send an email</a>
+    <a class="btn" href="https://github.com/naissenchebbi" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div></section>
+</main>
+
+<footer>© 2026 Naissen Chebbi — Curiosity is the beginning of every great experiment.</footer>
+
+<script>
+// Theme toggle
+const root=document.documentElement,tbtn=document.getElementById('theme');
+function setTheme(l){root.classList.toggle('light',l);tbtn.textContent=l?'☀️':'🌙'}
+let saved=null;try{saved=localStorage.getItem('theme')}catch(e){}
+setTheme(saved==='light');
+tbtn.onclick=()=>{const l=!root.classList.contains('light');setTheme(l);try{localStorage.setItem('theme',l?'light':'dark')}catch(e){}};
+
+// Typing effect
+const words=['AI & Data Science Engineering Student','Exploring NLP and LLMs','Building RAG applications','Learning MLOps'];
+const el=document.getElementById('typing');let w=0,c=0,del=false;
+(function type(){const t=words[w];el.textContent=t.slice(0,c);
+ if(!del&&c===t.length){del=true;return setTimeout(type,1600)}
+ if(del&&c===0){del=false;w=(w+1)%words.length}
+ c+=del?-1:1;setTimeout(type,del?30:60)})();
+
+// Scroll reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
+
+// Star field
+const cv=document.getElementById('stars'),ctx=cv.getContext('2d');let stars=[];
+function resize(){cv.width=innerWidth;cv.height=innerHeight;stars=Array.from({length:Math.min(140,innerWidth/8)},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.4+.3,s:Math.random()*.25+.05,a:Math.random()}))}
+resize();addEventListener('resize',resize);
+(function draw(){ctx.clearRect(0,0,cv.width,cv.height);
+ const light=root.classList.contains('light');
+ stars.forEach(s=>{s.a+=.012;s.y+=s.s;if(s.y>cv.height){s.y=0;s.x=Math.random()*cv.width}
+  ctx.globalAlpha=(.35+Math.sin(s.a)*.35)*(light?.5:1);
+  ctx.fillStyle=light?'#9B72CF':'#E7A4D7';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.283);ctx.fill()});
+ requestAnimationFrame(draw)})();
+</script>
+</body>
+</html>
