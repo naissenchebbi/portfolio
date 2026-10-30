@@ -91,7 +91,12 @@ button.more .i{transition:transform .2s}button.more:hover .i{transform:translate
 body.lock{overflow:hidden}
 .certs{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
 
-/* NEW: GitHub link on cards + video demo */
+/* FIX: certificates, vouchers and photos are shown whole, not cropped */
+.certs .thumb img{object-fit:contain;background:var(--bg2)}
+.gal .thumb{aspect-ratio:auto}
+.gal .thumb img{height:auto;object-fit:contain;background:var(--bg2)}
+
+/* GitHub link on cards + video demo */
 .row{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:6px}
 a.more{display:inline-flex;gap:8px;align-items:center;color:var(--p2);font-weight:500;font-size:.92rem;transition:transform .2s}
 a.more:hover{transform:translateY(-2px)}
@@ -123,7 +128,7 @@ a.more:hover{transform:translateY(-2px)}
 <nav><div class="wrap">
   <a href="#home" class="logo">NC.</a>
   <div class="links">
-    <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#certifications">Certifications</a><a href="#leadership">Leadership</a><a href="#contact">Contact</a>
+    <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#certifications">Certifications</a><a href="#leadership">Leadership</a><a href="#events">Events</a><a href="#contact">Contact</a>
     <button id="theme" aria-label="Toggle theme"><svg class="i"><use href="#i-moon"/></svg></button>
   </div>
 </div></nav>
@@ -196,8 +201,13 @@ a.more:hover{transform:translateY(-2px)}
   <div class="grid projects" id="g-lead"></div>
 </div></section>
 
+<section id="events"><div class="wrap">
+  <div class="eyebrow">07 — Events</div><h2>Congresses &amp; <span class="grad">events</span></h2>
+  <div class="grid certs" id="g-event"></div>
+</div></section>
+
 <section id="contact" class="contact"><div class="wrap">
-  <div class="eyebrow">07 — Contact</div><h2>Let's <span class="grad">connect</span></h2>
+  <div class="eyebrow">08 — Contact</div><h2>Let's <span class="grad">connect</span></h2>
   <p>Open to collaborations and interesting AI projects. Feel free to reach out.</p>
   <div class="btns" style="justify-content:center">
     <a class="btn primary" href="mailto:nchebbi755@gmail.com">Send an email</a>
@@ -228,7 +238,7 @@ const el=document.getElementById('typing');let w=0,c=0,del=false;
  c+=del?-1:1;setTimeout(type,del?30:60)})();
 
 /* ===== EDIT YOUR CONTENT HERE =====
-   c: exp | proj | lead | cert   m: subtitle   t: title   s: short summary on the card
+   c: exp | proj | lead | cert | event   m: subtitle   t: title   s: short summary on the card
    tags: tool chips   p: detail bullets (shown in the popup)
    img: screenshots/photos (put the files in an "images" folder)
    video: video file (e.g. 'videos/demo.mp4') or a YouTube embed link
@@ -249,6 +259,9 @@ fraud:{c:'proj',m:'MLOps · Sep 2026',t:'Credit Card Fraud Detection',s:'End-to-
 career:{c:'proj',m:'AI · RAG · Aug 2026',t:'MyCareer — AI Career Assistant',s:'Full-stack assistant with a RAG pipeline giving source-grounded, cited answers over papers, news and job listings.',tags:['React','FastAPI','Llama 3 (Groq)','ChromaDB','Celery','Redis','Docker'],
  p:['Architected a full-stack assistant with React.js, FastAPI and Groq-hosted Llama 3, powered by a RAG pipeline for citation-based answers.','Semantic retrieval with Sentence Transformers embeddings (384-dim) and ChromaDB (HNSW, cosine similarity).','Automated multi-source ingestion and personalized daily email digests via REST APIs, Celery, Redis and SMTP (Gmail API).','Containerized with Docker Compose.','Add more technical details here.'],
  img:['images/mycareer-1.png','images/mycareer-2.png'],links:[['GitHub',''],['Live demo','']]},
+psc:{c:'proj',m:'Socio-cultural project · Frada school',t:'PSC — Frada School Makeover',s:'Sponsorship-funded makeover of a school: renovated classroom, new equipment, a football court and two workshops. Graded 17.5/20.',tags:['Sponsoring','Fundraising','Teamwork','Workshops','Project management'],
+ p:['Ran a sponsoring campaign to collect funds, then used them to improve the Frada school.','Redecorated the whole classroom: new paint, decorations and stickers, new keyboards, mouse pads and mice, and toys for the kids.','Created a football court for sports, added new paintings on the walls and repainted the doors.','Organized two workshops: first aid in partnership with the Tunisian Red Crescent (Croissant-Rouge Tunisien) and sustainable energy with IEEE ESSTHS.','Held an inauguration day and a booth presenting our work, then defended the project in a final soutenance: 17.5/20.'],
+ img:[],links:[]},
 az900:{c:'cert',m:'2026',t:'Microsoft Azure Fundamentals (AZ-900)',s:'Cloud concepts and core Azure services.',b:'View certificate',p:['Add what you learned or the skills covered.'],img:['images/voucher.png','images/azure900.png'],links:[['Verify voucher','']]},
 r:{c:'cert',m:'2026',t:'Intermediate R',s:'Data manipulation and analysis with R.',b:'View certificate',p:['Add what you learned.'],img:['images/r-certificate.png','images/r-voucher.png'],links:[['Verify voucher','']]},
 prob:{c:'cert',m:'2022',t:'Foundations of Probability in Python',s:'Probability fundamentals applied in Python.',b:'View certificate',p:['Add what you learned.'],img:['images/probability-certificate.png'],links:[['Verify voucher','']]},
@@ -256,16 +269,31 @@ delf:{c:'cert',m:'2022',t:'DELF B2',s:'French language certification, level B2.'
 l1:{c:'lead',m:'IEEE ESSTHS Student Branch · 2025–2026',t:'Treasurer',s:'Managing the budget and finances of the student branch.',p:['Add your responsibilities, projects and results here.'],img:['images/lead-treasurer.png'],links:[]},
 l2:{c:'lead',m:'IAS TAM 3.0 Congress · 2023–2024',t:'Logistics Chief',s:'Leading the logistics of the congress.',p:['Add your responsibilities, team size and results here.'],img:['images/lead-tam.png'],links:[]},
 l3:{c:'lead',m:'IEEE ESSTHS Student Branch · 2022–2023',t:'Vice President, Business Department',s:'Led the business department of the branch.',p:['Add your responsibilities and results here.'],img:['images/lead-vp.png'],links:[]},
-l4:{c:'lead',m:'Sécurinet ISITCom · 2021–2022',t:'Active Member',s:'Active member of the cybersecurity club.',p:['Add your activities here.'],img:['images/lead-securinet.png'],links:[]}
+l4:{c:'lead',m:'Sécurinet ISITCom · 2021–2022',t:'Active Member',s:'Active member of the cybersecurity club.',p:['Add your activities here.'],img:['images/lead-securinet.png'],links:[]},
+
+/* ---------- EVENTS (add the year in "m" and photos in "img" whenever you want) ---------- */
+ev_ai:{c:'event',m:'ARSI · Competition',t:'AI Night Challenge — 2nd Place',s:'Finalist team in the AI Night Challenge organized by ARSI. We finished in second place.',b:'View details',p:['Competed as a team in the AI Night Challenge organized by ARSI.','Reached the final and won 2nd place.','Add the topic, your role and what the team built.'],img:[],links:[]},
+ev_wie:{c:'event',m:'IEEE WIE · ACT 4.0',t:'WIE ACT 4.0 — Challenge Pitch',s:'Pitched the technical and the non-technical challenge of the event.',b:'View details',p:['Presented (pitched) both the technical and the non-technical challenge.','Add the format, the audience and the outcome.'],img:[],links:[]},
+ev_gaieca:{c:'event',m:'Organizing Committee · 2026',t:'GAIECA 2026',s:'Member of the Organizing Committee (OC).',b:'View details',p:['Part of the Organizing Committee of GAIECA 2026.','Add your responsibilities and results.'],img:[],links:[]},
+ev_thyro:{c:'event',m:'Panelist',t:'Thyrocare Event',s:'Invited panelist, sharing my experience with the audience.',b:'View details',p:['One of the panelists of the Thyrocare event.','Add the topic and what you shared.'],img:[],links:[]},
+ev_mena:{c:'event',m:'IEEE Region 8 · MENA',t:'IEEE R8 MENA Student and Young Professional Congress',s:'Attended the MENA Student and Young Professional (SYP) Congress.',b:'View certificate',p:['Add what you learned and who you met.'],img:['images/mena.png'],links:[]},
+ev_tsyp13:{c:'event',m:'IEEE Tunisia · TSYP 13',t:'TSYP 13',s:'Attended the IEEE Tunisian Student and Young Professional Congress.',b:'View details',p:['Add what you learned and your highlights.'],img:[],links:[['Event website','https://tsyp.ieee.tn/']]},
+ev_tsyp12:{c:'event',m:'IEEE Tunisia · TSYP 12',t:'TSYP 12',s:'Attended the IEEE Tunisian Student and Young Professional Congress.',b:'View details',p:['Add what you learned and your highlights.'],img:[],links:[['Event website','https://tsyp.ieee.tn/']]},
+ev_tsyp11:{c:'event',m:'IEEE Tunisia · TSYP 11',t:'TSYP 11 — ESSTHS Booth Chief',s:'Led the IEEE ESSTHS booth, was part of the 24/7 team and attended as a participant.',b:'View details',p:['Booth chief of the IEEE ESSTHS booth.','Member of the 24/7 team.','Participant in the congress.','Add results, team size and photos.'],img:[],links:[['Event website','https://tsyp.ieee.tn/']]},
+ev_tsypx:{c:'event',m:'IEEE Tunisia · TSYP X',t:'TSYP X',s:'Attended the IEEE Tunisian Student and Young Professional Congress.',b:'View details',p:['Add what you learned and your highlights.'],img:[],links:[['Event website','https://tsyp.ieee.tn/']]},
+ev_tam4:{c:'event',m:'IEEE IAS',t:'IAS TAM 4.0',s:'Attended IAS TAM 4.0. (I was Logistics Chief of the 3.0 edition, see Leadership.)',b:'View details',p:['Add what you learned and your highlights.'],img:[],links:[]},
+ev_pes:{c:'event',m:'IEEE PES',t:'PES TGM 3.0',s:'Attended PES TGM 3.0.',b:'View details',p:['Add what you learned and your highlights.'],img:[],links:[]},
+ev_nxt:{c:'event',m:'2025',t:'NXT 2025',s:'Attended NXT 2025.',b:'View details',p:['Add what you learned and your highlights.'],img:[],links:[]},
+ev_xtreem:{c:'event',m:'Participant',t:'Xtreem',s:'Participated in Xtreem.',b:'View details',p:['Add the format, your role and the outcome.'],img:[],links:[]}
 };
-const G={exp:'g-exp',proj:'g-proj',lead:'g-lead',cert:'g-cert'};
+const G={exp:'g-exp',proj:'g-proj',lead:'g-lead',cert:'g-cert',event:'g-event'};
 function ph(i){const d=document.createElement('div');d.className='ph';d.innerHTML='<svg class="i"><use href="#i-img"/></svg><span>'+i.getAttribute('src')+'</span>';i.replaceWith(d)}
 const th=s=>'<div class="thumb"><img src="'+s+'" alt="" loading="lazy" onerror="ph(this)"></div>';
 const chips=a=>a&&a.length?'<div class="tags">'+a.map(x=>'<span class="tag">'+x+'</span>').join('')+'</div>':'';
 const vid=u=>/youtube|youtu\.be|vimeo|loom/.test(u)?'<div class="vid"><iframe src="'+u+'" title="Demo video" allowfullscreen loading="lazy"></iframe></div>':'<div class="vid"><video controls preload="metadata" src="'+u+'"></video></div>';
 
 function card(k,d){const g=(d.links||[]).find(l=>l[0]==='GitHub'&&l[1]);
- return '<article class="card reveal">'+(d.c!=='exp'&&d.img&&d.img[0]?th(d.img[0]):'')+'<div class="meta">'+d.m+'</div><h3>'+d.t+'</h3><p>'+d.s+'</p>'+(d.c==='cert'||d.c==='lead'?'':chips(d.tags))+'<div class="row"><button class="more" data-k="'+k+'">'+(d.b||'View details')+' <svg class="i"><use href="#i-arrow"/></svg></button>'+(g?'<a class="more" href="'+g[1]+'" target="_blank" rel="noopener"><svg class="i"><use href="#i-github"/></svg> GitHub</a>':'')+'</div></article>'}
+ return '<article class="card reveal">'+(d.c!=='exp'&&d.img&&d.img[0]?th(d.img[0]):'')+'<div class="meta">'+d.m+'</div><h3>'+d.t+'</h3><p>'+d.s+'</p>'+(d.c==='cert'||d.c==='lead'||d.c==='event'?'':chips(d.tags))+'<div class="row"><button class="more" data-k="'+k+'">'+(d.b||'View details')+' <svg class="i"><use href="#i-arrow"/></svg></button>'+(g?'<a class="more" href="'+g[1]+'" target="_blank" rel="noopener"><svg class="i"><use href="#i-github"/></svg> GitHub</a>':'')+'</div></article>'}
 
 Object.entries(D).forEach(([k,d])=>document.getElementById(G[d.c]).insertAdjacentHTML('beforeend',card(k,d)));
 const mo=document.getElementById('modal'),mb=document.getElementById('mb');
