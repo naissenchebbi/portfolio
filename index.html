@@ -91,7 +91,7 @@ button.more .i{transition:transform .2s}button.more:hover .i{transform:translate
 body.lock{overflow:hidden}
 .certs{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
 
-/* FIX: certificates, vouchers and photos are shown whole, not cropped */
+/* certificates, vouchers and photos are shown whole, not cropped */
 .certs .thumb img{object-fit:contain;background:var(--bg2)}
 .gal .thumb{aspect-ratio:auto}
 .gal .thumb img{height:auto;object-fit:contain;background:var(--bg2)}
@@ -103,10 +103,19 @@ a.more:hover{transform:translateY(-2px)}
 .vid{aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#000;margin:6px 0 10px}
 .vid video,.vid iframe{width:100%;height:100%;border:0;display:block}
 
+/* EVENTS CAROUSEL — one line, auto-moving, pauses on hover */
+.marquee{overflow:hidden;padding:16px 0 22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.mtrack{display:flex;width:max-content;animation:marquee var(--dur,70s) linear infinite}
+.marquee:hover .mtrack,.marquee:focus-within .mtrack{animation-play-state:paused}
+.mtrack .card{flex:0 0 300px;width:300px;margin-right:22px;display:flex;flex-direction:column}
+.mtrack .card .row{margin-top:auto;padding-top:10px}
+.mtrack .thumb img{object-fit:contain;background:var(--bg2)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
 .reveal.show{opacity:1;transform:none}
-@media(max-width:820px){.hero .wrap,.about{grid-template-columns:1fr}.photo{order:-1;width:min(240px,70%)}.links a:not(#theme){display:none}section{padding:70px 0}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@media(max-width:820px){.hero .wrap,.about{grid-template-columns:1fr}.photo{order:-1;width:min(240px,70%)}.links a:not(#theme){display:none}section{padding:70px 0}.mtrack .card{flex-basis:260px;width:260px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.mtrack .dup{display:none}}
 </style>
 </head>
 <body>
@@ -201,10 +210,12 @@ a.more:hover{transform:translateY(-2px)}
   <div class="grid projects" id="g-lead"></div>
 </div></section>
 
-<section id="events"><div class="wrap">
-  <div class="eyebrow">07 — Events</div><h2>Congresses &amp; <span class="grad">events</span></h2>
-  <div class="grid certs" id="g-event"></div>
-</div></section>
+<section id="events">
+  <div class="wrap">
+    <div class="eyebrow">07 — Events</div><h2>Congresses &amp; <span class="grad">events</span></h2>
+  </div>
+  <div class="marquee"><div class="mtrack" id="g-event"></div></div>
+</section>
 
 <section id="contact" class="contact"><div class="wrap">
   <div class="eyebrow">08 — Contact</div><h2>Let's <span class="grad">connect</span></h2>
@@ -271,7 +282,7 @@ l2:{c:'lead',m:'IAS TAM 3.0 Congress · 2023–2024',t:'Logistics Chief',s:'Lead
 l3:{c:'lead',m:'IEEE ESSTHS Student Branch · 2022–2023',t:'Vice President, Business Department',s:'Led the business department of the branch.',p:['Add your responsibilities and results here.'],img:['images/lead-vp.png'],links:[]},
 l4:{c:'lead',m:'Sécurinet ISITCom · 2021–2022',t:'Active Member',s:'Active member of the cybersecurity club.',p:['Add your activities here.'],img:['images/lead-securinet.png'],links:[]},
 
-/* ---------- EVENTS (add the year in "m" and photos in "img" whenever you want) ---------- */
+/* ---------- EVENTS (shown in the moving carousel) ---------- */
 ev_ai:{c:'event',m:'ARSI · Competition',t:'AI Night Challenge — 2nd Place',s:'Finalist team in the AI Night Challenge organized by ARSI. We finished in second place.',b:'View details',p:['Competed as a team in the AI Night Challenge organized by ARSI.','Reached the final and won 2nd place.','Add the topic, your role and what the team built.'],img:[],links:[]},
 ev_wie:{c:'event',m:'IEEE WIE · ACT 4.0',t:'WIE ACT 4.0 — Challenge Pitch',s:'Pitched the technical and the non-technical challenge of the event.',b:'View details',p:['Presented (pitched) both the technical and the non-technical challenge.','Add the format, the audience and the outcome.'],img:[],links:[]},
 ev_gaieca:{c:'event',m:'Organizing Committee · 2026',t:'GAIECA 2026',s:'Member of the Organizing Committee (OC).',b:'View details',p:['Part of the Organizing Committee of GAIECA 2026.','Add your responsibilities and results.'],img:[],links:[]},
@@ -286,16 +297,24 @@ ev_pes:{c:'event',m:'IEEE PES',t:'PES TGM 3.0',s:'Attended PES TGM 3.0.',b:'View
 ev_nxt:{c:'event',m:'2025',t:'NXT 2025',s:'Attended NXT 2025.',b:'View details',p:['Add what you learned and your highlights.'],img:[],links:[]},
 ev_xtreem:{c:'event',m:'Participant',t:'Xtreem',s:'Participated in Xtreem.',b:'View details',p:['Add the format, your role and the outcome.'],img:[],links:[]}
 };
-const G={exp:'g-exp',proj:'g-proj',lead:'g-lead',cert:'g-cert',event:'g-event'};
+const G={exp:'g-exp',proj:'g-proj',lead:'g-lead',cert:'g-cert'};
 function ph(i){const d=document.createElement('div');d.className='ph';d.innerHTML='<svg class="i"><use href="#i-img"/></svg><span>'+i.getAttribute('src')+'</span>';i.replaceWith(d)}
 const th=s=>'<div class="thumb"><img src="'+s+'" alt="" loading="lazy" onerror="ph(this)"></div>';
 const chips=a=>a&&a.length?'<div class="tags">'+a.map(x=>'<span class="tag">'+x+'</span>').join('')+'</div>':'';
 const vid=u=>/youtube|youtu\.be|vimeo|loom/.test(u)?'<div class="vid"><iframe src="'+u+'" title="Demo video" allowfullscreen loading="lazy"></iframe></div>':'<div class="vid"><video controls preload="metadata" src="'+u+'"></video></div>';
 
-function card(k,d){const g=(d.links||[]).find(l=>l[0]==='GitHub'&&l[1]);
- return '<article class="card reveal">'+(d.c!=='exp'&&d.img&&d.img[0]?th(d.img[0]):'')+'<div class="meta">'+d.m+'</div><h3>'+d.t+'</h3><p>'+d.s+'</p>'+(d.c==='cert'||d.c==='lead'||d.c==='event'?'':chips(d.tags))+'<div class="row"><button class="more" data-k="'+k+'">'+(d.b||'View details')+' <svg class="i"><use href="#i-arrow"/></svg></button>'+(g?'<a class="more" href="'+g[1]+'" target="_blank" rel="noopener"><svg class="i"><use href="#i-github"/></svg> GitHub</a>':'')+'</div></article>'}
+function card(k,d,dup){const g=(d.links||[]).find(l=>l[0]==='GitHub'&&l[1]);
+ return '<article class="card'+(d.c==='event'?'':' reveal')+(dup?' dup':'')+'"'+(dup?' aria-hidden="true"':'')+'>'+(d.c!=='exp'&&d.img&&d.img[0]?th(d.img[0]):'')+'<div class="meta">'+d.m+'</div><h3>'+d.t+'</h3><p>'+d.s+'</p>'+(d.c==='cert'||d.c==='lead'||d.c==='event'?'':chips(d.tags))+'<div class="row"><button class="more" data-k="'+k+'"'+(dup?' tabindex="-1"':'')+'>'+(d.b||'View details')+' <svg class="i"><use href="#i-arrow"/></svg></button>'+(g?'<a class="more" href="'+g[1]+'" target="_blank" rel="noopener"'+(dup?' tabindex="-1"':'')+'><svg class="i"><use href="#i-github"/></svg> GitHub</a>':'')+'</div></article>'}
 
-Object.entries(D).forEach(([k,d])=>document.getElementById(G[d.c]).insertAdjacentHTML('beforeend',card(k,d)));
+// Normal sections
+const evs=[];
+Object.entries(D).forEach(([k,d])=>{if(d.c==='event'){evs.push([k,d]);return}document.getElementById(G[d.c]).insertAdjacentHTML('beforeend',card(k,d))});
+
+// Events carousel: the cards are rendered twice so the loop is seamless
+const trk=document.getElementById('g-event');
+trk.innerHTML=evs.map(([k,d])=>card(k,d)).join('')+evs.map(([k,d])=>card(k,d,true)).join('');
+trk.style.setProperty('--dur',(evs.length*6)+'s'); // lower the 6 to make it faster, raise it to make it slower
+
 const mo=document.getElementById('modal'),mb=document.getElementById('mb');
 function openD(k){const d=D[k];
  mb.innerHTML='<div class="meta">'+d.m+'</div><h2>'+d.t+'</h2><p>'+d.s+'</p>'
