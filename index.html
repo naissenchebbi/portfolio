@@ -93,6 +93,7 @@ body.lock{overflow:hidden}
 
 /* certificates, vouchers and photos are shown whole, not cropped */
 .certs .thumb img{object-fit:contain;background:var(--bg2)}
+#g-lead .thumb img{object-fit:contain;background:var(--bg2)}
 .gal .thumb{aspect-ratio:auto}
 .gal .thumb img{height:auto;object-fit:contain;background:var(--bg2)}
 
@@ -253,11 +254,12 @@ const el=document.getElementById('typing');let w=0,c=0,del=false;
 /* ===== EDIT YOUR CONTENT HERE =====
    c: exp | proj | lead | cert | event   m: subtitle   t: title   s: short summary on the card
    tags: tool chips   p: detail bullets (shown in the popup)
-   img: screenshots/photos (put the files in an "images" folder)
+   img: screenshots/photos (put the files in an "images" folder; the first one is the card thumbnail)
    video: video file (e.g. 'videos/demo.mp4') or a YouTube embed link
-   links: [["GitHub","https://github.com/..."],["Live demo","https://..."]]  (empty url = hidden) */
+   links: [["GitHub","https://github.com/..."],["Live demo","https://..."]]  (empty url = hidden)
+   RULE: every entry ends with "}," except the very last one. Every text must be inside quotes '...' */
 const D={
-acc:{c:'exp',m:'Internship · Aug–Sep 2026 · Tunisia',t:'Workplace Accident Reporting & Tracking Platform',s:'Smart web platform to report, track and analyze workplace accidents, with real-time alerts and AI-assisted analysis.',tags:['Django REST','Next.js','PostgreSQL','JWT','Gemini API','SMTP','TunisieSMS Api],
+acc:{c:'exp',m:'Internship · Aug–Sep 2026 · Tunisia',t:'Workplace Accident Reporting & Tracking Platform',s:'Smart web platform to report, track and analyze workplace accidents, with real-time alerts and AI-assisted analysis.',tags:['Django REST','Next.js','PostgreSQL','JWT','Gemini API','SMTP','TunisieSMS API'],
  p:['Built a Django REST API with JWT authentication and a modern Next.js frontend.','Modeled the PostgreSQL database for incidents, users and follow-up actions.','Integrated SMTP and SMS notifications for real-time alerts.','Integrated the Gemini API for automatic incident analysis and corrective action suggestions.','Add more technical details here: architecture, challenges, results.'],
  img:['images/accident-1.png','images/accident-2.png'],links:[['GitHub',''],['Live demo','']]},
 leoni2:{c:'exp',m:'Feb–May 2024 · LEONI Tunisie',t:'Full-Stack Developer Intern',s:'Web application for social service data management with real-time chat.',tags:['Angular','Spring Boot','Express.js','Socket.IO','MySQL'],
@@ -285,6 +287,9 @@ l1:{c:'lead',m:'IEEE ESSTHS Student Branch · 2025–2026',t:'Treasurer',s:'Mana
 l2:{c:'lead',m:'IAS TAM 3.0 Congress · 2023–2024',t:'Logistics Chief',s:'Leading the logistics of the congress.',p:['Add your responsibilities, team size and results here.'],img:['images/lead-tam.png'],links:[]},
 l3:{c:'lead',m:'IEEE ESSTHS Student Branch · 2022–2023',t:'Vice President, Business Department',s:'Led the business department of the branch.',p:['Add your responsibilities and results here.'],img:['images/lead-vp.png'],links:[]},
 l4:{c:'lead',m:'Sécurinet ISITCom · 2021–2022',t:'Active Member',s:'Active member of the cybersecurity club.',p:['Add your activities here.'],img:['images/lead-securinet.png'],links:[]},
+l5:{c:'lead',m:'IEEE · Member since 2022',t:'Active IEEE Member',s:'Active IEEE member since 2022, with a certificate of active membership.',p:['Active IEEE member since 2022.','Roles held in the IEEE ESSTHS Student Branch: Active Member, Vice President of the Business Department and Treasurer.','Add your activities, events and results here.'],img:['images/ieee-active-member.png'],links:[]},
+l6:{c:'lead',m:'IEEE Women in Engineering · ACT 4.0',t:'Active WIE Member',s:'Active member of IEEE WIE. Had the honor to pitch both the technical and the non-technical challenge at WIE ACT 4.0.',p:['Active member of IEEE Women in Engineering (WIE).','Had the honor to pitch both the technical and the non-technical challenge at WIE ACT 4.0.','Add the audience, the outcome and what you learned.'],img:['images/events/wie-act-1.png','images/events/wie-act-certificate.png'],links:[]},
+l7:{c:'lead',m:'IEEE PES · TGM 3.0',t:'Logistics Chief',s:'Led the logistics of PES TGM 3.0.',p:['Logistics Chief of PES TGM 3.0.','Add your responsibilities, team size and results here.'],img:['images/events/pes-tgm-1.png','images/events/pes-tgm-certificate.png'],links:[]},
 
 /* ---------- EVENTS (shown in the moving carousel) ---------- */
 ev_ai:{c:'event',m:'ARSI · Competition',t:'AI Night Challenge — 2nd Place',s:'Finalist team in the AI Night Challenge organized by ARSI. We finished in second place.',b:'View photos & certificate',p:['Competed as a team in the AI Night Challenge organized by ARSI.','Reached the final and won 2nd place.','Add the topic, your role and what the team built.'],img:['images/events/ai-night-1.png','images/events/ai-night-certificate.png'],links:[]},
@@ -297,17 +302,20 @@ ev_tsyp12:{c:'event',m:'IEEE Tunisia · TSYP 12 . 2024 ',t:'TSYP 12',s:'Attended
 ev_tsyp11:{c:'event',m:'IEEE Tunisia · TSYP 11 , 2023',t:'TSYP 11 — ESSTHS Booth Chief',s:'Led the IEEE ESSTHS booth, was part of the 24/7 team and attended as a participant.',b:'View photos & certificate',p:['Booth chief of the IEEE ESSTHS booth.','Member of the 24/7 team.','Participant in the congress.','Add results, team size and photos.'],img:['images/Nayssen-Chebbi-tsyp-11.png','images/Nayssen-Chebbi-participation.png','images/Tsyp11-certificate.png'],links:[]},
 ev_tsypx:{c:'event',m:'IEEE Tunisia · TSYP X . 2022',t:'TSYP X',s:'Attended the IEEE Tunisian Student and Young Professional Congress .',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/tsypx-1.png','images/events/tsypx-certificate.png'],links:[]},
 ev_tam4:{c:'event',m:'IEEE IAS',t:'IAS TAM 4.0',s:'Attended IAS TAM 4.0. (I was Logistics Chief of the 3.0 edition, see Leadership.)',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/tam4-1.png','images/events/tam4-certificate.png'],links:[]},
-ev_pes:{c:'event',m:'IEEE PES',t:'PES TGM 3.0',s:'Attended PES TGM 3.0.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/pes-tgm-1.png','images/events/pes-tgm-certificate.png'],links:[]},
+ev_pes:{c:'event',m:'IEEE PES',t:'PES TGM 3.0 — Logistics Chief',s:'Logistics Chief of PES TGM 3.0.',b:'View photos & certificate',p:['Logistics Chief of PES TGM 3.0.','Add your responsibilities, team size and results here.'],img:['images/events/pes-tgm-1.png','images/events/pes-tgm-certificate.png'],links:[]},
 ev_nxt:{c:'event',m:'2025',t:'NXT 2025',s:'Attended NXT 2025.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/nxt-1.png','images/events/nxt-certificate.png'],links:[]},
 ev_xtreem:{c:'event',m:'Participant',t:'Xtreem',s:'Participated in Xtreem.',b:'View photos & certificate',p:['Add the format, your role and the outcome.'],img:['images/events/xtreem-1.png','images/events/xtreem-certificate.png'],links:[]}
 };
 const G={exp:'g-exp',proj:'g-proj',lead:'g-lead',cert:'g-cert'};
 
-// Images: if a file is not found, try other extensions (.png .jpg .jpeg .webp) before showing the placeholder
+// Images: if a file is not found, try the same name in lowercase / Capitalized and other extensions before showing the placeholder
 function ph(i){const d=document.createElement('div');d.className='ph';d.innerHTML='<svg class="i"><use href="#i-img"/></svg><span>'+(i.dataset.o||i.getAttribute('src'))+'</span>';i.replaceWith(d)}
 function fb(i){if(!i.dataset.o)i.dataset.o=i.getAttribute('src');
- const base=i.dataset.o.replace(/\.[^./]+$/,''),tried=(i.dataset.tr||i.dataset.o).split('|'),
- nx=['.png','.jpg','.jpeg','.webp','.PNG','.JPG','.JPEG'].map(e=>base+e).find(x=>!tried.includes(x));
+ const o=i.dataset.o,tried=(i.dataset.tr||o).split('|'),
+ dir=o.slice(0,o.lastIndexOf('/')+1),nm=o.slice(dir.length).replace(/\.[^.]+$/,''),
+ names=[nm,nm.toLowerCase(),nm.charAt(0).toUpperCase()+nm.slice(1)],
+ exts=['.png','.jpg','.jpeg','.webp','.PNG','.JPG','.JPEG'],
+ nx=names.flatMap(n=>exts.map(e=>dir+n+e)).find(x=>!tried.includes(x));
  if(nx){tried.push(nx);i.dataset.tr=tried.join('|');i.src=nx}else ph(i)}
 const th=s=>'<div class="thumb"><img src="'+s+'" alt="" loading="lazy" onerror="fb(this)"></div>';
 const chips=a=>a&&a.length?'<div class="tags">'+a.map(x=>'<span class="tag">'+x+'</span>').join('')+'</div>':'';
