@@ -151,7 +151,7 @@ a.more:hover{transform:translateY(-2px)}
     <div class="btns">
       <a href="#projects" class="btn primary">View my projects</a>
       <a href="#contact" class="btn">Contact me</a>
-      <a href="Naissen_Chebbi_CV.pdf" class="btn" download>Download CV</a>
+      <a href="cv%20naissen%20chebbi%201.pdf" class="btn" target="_blank" rel="noopener">Download CV</a>
     </div>
   </div>
   <div class="photo"><img src="photo.png" alt="Naïssen Chebbi"></div>
@@ -223,7 +223,7 @@ a.more:hover{transform:translateY(-2px)}
   <p>Open to collaborations and interesting AI projects. Feel free to reach out.</p>
   <div class="btns" style="justify-content:center">
     <a class="btn primary" href="mailto:nchebbi755@gmail.com">Send an email</a>
-    <a class="btn" href="Naissen_Chebbi_CV.pdf" download>Download CV</a>
+    <a class="btn" href="cv%20naissen%20chebbi%201.pdf" target="_blank" rel="noopener">Download CV</a>
     <a class="btn" href="https://github.com/naissenchebbi" target="_blank" rel="noopener">GitHub</a>
     <a class="btn" href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a>
   </div>
@@ -253,10 +253,9 @@ const el=document.getElementById('typing');let w=0,c=0,del=false;
 /* ===== EDIT YOUR CONTENT HERE =====
    c: exp | proj | lead | cert | event   m: subtitle   t: title   s: short summary on the card
    tags: tool chips   p: detail bullets (shown in the popup)
-   img: screenshots/photos (put the files in an "images" folder; the first one is the card thumbnail)
+   img: screenshots/photos (put the files in an "images" folder)
    video: video file (e.g. 'videos/demo.mp4') or a YouTube embed link
-   links: [["GitHub","https://github.com/..."],["Live demo","https://..."]]  (empty url = hidden)
-   RULE: every entry ends with "}," except the very last one. */
+   links: [["GitHub","https://github.com/..."],["Live demo","https://..."]]  (empty url = hidden) */
 const D={
 acc:{c:'exp',m:'Internship · Aug–Sep 2026 · Tunisia',t:'Workplace Accident Reporting & Tracking Platform',s:'Smart web platform to report, track and analyze workplace accidents, with real-time alerts and AI-assisted analysis.',tags:['Django REST','Next.js','PostgreSQL','JWT','Gemini API'],
  p:['Built a Django REST API with JWT authentication and a modern Next.js frontend.','Modeled the PostgreSQL database for incidents, users and follow-up actions.','Integrated SMTP and SMS notifications for real-time alerts.','Integrated the Gemini API for automatic incident analysis and corrective action suggestions.','Add more technical details here: architecture, challenges, results.'],
@@ -277,32 +276,31 @@ psc:{c:'proj',m:'Socio-cultural project · Frada school',t:'PSC — Frada School
  p:['Ran a sponsoring campaign to collect funds, then used them to improve the Frada school.','Redecorated the whole classroom: new paint, decorations and stickers, new keyboards, mouse pads and mice, and toys for the kids.','Created a football court for sports, added new paintings on the walls and repainted the doors.','Organized two workshops: first aid in partnership with the Tunisian Red Crescent (Croissant-Rouge Tunisien) and sustainable energy with IEEE ESSTHS.','Held an inauguration day and a booth presenting our work, then defended the project in a final soutenance: 17.5/20.'],
  img:['images/psc-1.png','images/psc-2.png','images/psc-3.png','images/psc-4.png'],links:[]},
 az900:{c:'cert',m:'2026',t:'Microsoft Azure Fundamentals (AZ-900)',s:'Cloud concepts and core Azure services.',b:'View certificate',p:['Add what you learned or the skills covered.'],img:['images/voucher.png','images/azure900.png'],links:[['Verify voucher','']]},
-r:{c:'cert',m:'2026',t:'Intermediate R',s:'Data manipulation and analysis with R.',b:'View certificate',p:['Add what you learned.'],img:['images/r-certificate.png','images/r-voucher.png'],links:[['Verify voucher','']]},
+r:{c:'cert',m:'2026',t:'Intermediate R',s:'Data manipulation and analysis with R.',b:'View certificate',p:['Add what you learned.'],img:['images/voucherR.png','images/intermediate-R.png'],links:[['Verify voucher','']]},
 prob:{c:'cert',m:'2022',t:'Foundations of Probability in Python',s:'Probability fundamentals applied in Python.',b:'View certificate',p:['Add what you learned.'],img:['images/probability-certificate.png'],links:[['Verify voucher','']]},
 delf:{c:'cert',m:'2022',t:'DELF B2',s:'French language certification, level B2.',b:'View certificate',p:['Add details.'],img:['images/delf-certificate.png'],links:[]},
-cisco:{c:'cert',m:'Cisco Networking Academy',t:'Introduction à la cybersécurité',s:'Cybersecurity fundamentals: threats, attacks and how to protect data and systems.',b:'View certificate',p:['Add what you learned or the skills covered.'],img:['images/cisco-cybersecurity.png'],links:[['Verify badge','']]},
-intror:{c:'cert',m:'DataCamp',t:'Introduction to R',s:'R fundamentals: data types, vectors, data frames and basic analysis.',b:'View certificate',p:['Add what you learned or the skills covered.'],img:['images/intro-r-certificate.png'],links:[['Verify certificate','']]},
+cisco:{c:'cert',m:'Cisco Networking Academy',t:'Introduction à la cybersécurité',s:'Cybersecurity fundamentals: threats, attacks and how to protect data and systems.',b:'View certificate',p:['Add what you learned or the skills covered.'],img:['images/intro-cybersecurity.png'],links:[['Verify badge','']]},
+intror:{c:'cert',m:'DataCamp',t:'Introduction to R',s:'R fundamentals: data types, vectors, data frames and basic analysis.',b:'View certificate',p:['Add what you learned or the skills covered.'],img:['images/introduction-to-R.png'],links:[['Verify certificate','']]},
 l1:{c:'lead',m:'IEEE ESSTHS Student Branch · 2025–2026',t:'Treasurer',s:'Managing the budget and finances of the student branch.',p:['Add your responsibilities, projects and results here.'],img:['images/lead-treasurer.png'],links:[]},
 l2:{c:'lead',m:'IAS TAM 3.0 Congress · 2023–2024',t:'Logistics Chief',s:'Leading the logistics of the congress.',p:['Add your responsibilities, team size and results here.'],img:['images/lead-tam.png'],links:[]},
 l3:{c:'lead',m:'IEEE ESSTHS Student Branch · 2022–2023',t:'Vice President, Business Department',s:'Led the business department of the branch.',p:['Add your responsibilities and results here.'],img:['images/lead-vp.png'],links:[]},
 l4:{c:'lead',m:'Sécurinet ISITCom · 2021–2022',t:'Active Member',s:'Active member of the cybersecurity club.',p:['Add your activities here.'],img:['images/lead-securinet.png'],links:[]},
 
-/* ---------- EVENTS (shown in the moving carousel; files go in images/events/) ---------- */
+/* ---------- EVENTS (shown in the moving carousel) ---------- */
 ev_ai:{c:'event',m:'ARSI · Competition',t:'AI Night Challenge — 2nd Place',s:'Finalist team in the AI Night Challenge organized by ARSI. We finished in second place.',b:'View photos & certificate',p:['Competed as a team in the AI Night Challenge organized by ARSI.','Reached the final and won 2nd place.','Add the topic, your role and what the team built.'],img:['images/events/ai-night-1.png','images/events/ai-night-certificate.png'],links:[]},
 ev_wie:{c:'event',m:'IEEE WIE · ACT 4.0',t:'WIE ACT 4.0 — Challenge Pitch',s:'Pitched the technical and the non-technical challenge of the event.',b:'View photos & certificate',p:['Presented (pitched) both the technical and the non-technical challenge.','Add the format, the audience and the outcome.'],img:['images/events/wie-act-1.png','images/events/wie-act-certificate.png'],links:[]},
 ev_gaieca:{c:'event',m:'Organizing Committee · 2026',t:'GAIECA 2026',s:'Member of the Organizing Committee (OC).',b:'View photos & certificate',p:['Part of the Organizing Committee of GAIECA 2026.','Add your responsibilities and results.'],img:['images/events/gaieca-1.png','images/events/gaieca-certificate.png'],links:[]},
 ev_thyro:{c:'event',m:'Panelist',t:'Thyrocare Event',s:'Invited panelist, sharing my experience with the audience.',b:'View photos & certificate',p:['One of the panelists of the Thyrocare event.','Add the topic and what you shared.'],img:['images/events/thyrocare-1.png','images/events/thyrocare-certificate.png'],links:[]},
 ev_mena:{c:'event',m:'IEEE Region 8 · MENA',t:'IEEE R8 MENA Student and Young Professional Congress',s:'Attended the MENA Student and Young Professional (SYP) Congress.',b:'View photos & certificate',p:['Add what you learned and who you met.'],img:['images/mena.png'],links:[]},
-ev_tsyp13:{c:'event',m:'IEEE Tunisia · TSYP 13',t:'TSYP 13',s:'Attended the IEEE Tunisian Student and Young Professional Congress.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/tsyp13-1.png','images/events/tsyp13-certificate.png'],links:[]},
-ev_tsyp12:{c:'event',m:'IEEE Tunisia · TSYP 12',t:'TSYP 12',s:'Attended the IEEE Tunisian Student and Young Professional Congress.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/tsyp12-1.png','images/events/tsyp12-certificate.png'],links:[]},
-ev_tsyp11:{c:'event',m:'IEEE Tunisia · TSYP 11',t:'TSYP 11 — ESSTHS Booth Chief',s:'Led the IEEE ESSTHS booth, was part of the 24/7 team and attended as a participant.',b:'View photos & certificate',p:['Booth chief of the IEEE ESSTHS booth.','Member of the 24/7 team.','Participant in the congress.','Add results, team size and photos.'],img:['images/events/tsyp11-1.png','images/events/tsyp11-2.png','images/events/tsyp11-certificate.png'],links:[]},
-ev_tsypx:{c:'event',m:'IEEE Tunisia · TSYP X',t:'TSYP X',s:'Attended the IEEE Tunisian Student and Young Professional Congress.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/tsypx-1.png','images/events/tsypx-certificate.png'],links:[]},
+ev_tsyp13:{c:'event',m:'IEEE Tunisia · TSYP 13 . 2025 ',t:'TSYP 13',s:'Attended the IEEE Tunisian Student and Young Professional Congress.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/tsyp13.png','images/tsyp13.png'],links:[]},
+ev_tsyp12:{c:'event',m:'IEEE Tunisia · TSYP 12 . 2024 ',t:'TSYP 12',s:'Attended the IEEE Tunisian Student and Young Professional Congress.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/tsyp12-1.png','images/tsyp12-certificate.png'],links:[]},
+ev_tsyp11:{c:'event',m:'IEEE Tunisia · TSYP 11 , 2023',t:'TSYP 11 — ESSTHS Booth Chief',s:'Led the IEEE ESSTHS booth, was part of the 24/7 team and attended as a participant.',b:'View photos & certificate',p:['Booth chief of the IEEE ESSTHS booth.','Member of the 24/7 team.','Participant in the congress.','Add results, team size and photos.'],img:['images/Nayssen-Chebbi-tsyp-11.png','images/Nayssen-Chebbi-participation.png','images/Tsyp11-certificate.png'],links:[]},
+ev_tsypx:{c:'event',m:'IEEE Tunisia · TSYP X . 2022',t:'TSYP X',s:'Attended the IEEE Tunisian Student and Young Professional Congress .',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/tsypx-1.png','images/events/tsypx-certificate.png'],links:[]},
 ev_tam4:{c:'event',m:'IEEE IAS',t:'IAS TAM 4.0',s:'Attended IAS TAM 4.0. (I was Logistics Chief of the 3.0 edition, see Leadership.)',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/tam4-1.png','images/events/tam4-certificate.png'],links:[]},
 ev_pes:{c:'event',m:'IEEE PES',t:'PES TGM 3.0',s:'Attended PES TGM 3.0.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/pes-tgm-1.png','images/events/pes-tgm-certificate.png'],links:[]},
 ev_nxt:{c:'event',m:'2025',t:'NXT 2025',s:'Attended NXT 2025.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/nxt-1.png','images/events/nxt-certificate.png'],links:[]},
 ev_xtreem:{c:'event',m:'Participant',t:'Xtreem',s:'Participated in Xtreem.',b:'View photos & certificate',p:['Add the format, your role and the outcome.'],img:['images/events/xtreem-1.png','images/events/xtreem-certificate.png'],links:[]}
 };
-
 const G={exp:'g-exp',proj:'g-proj',lead:'g-lead',cert:'g-cert'};
 
 // Images: if a file is not found, try other extensions (.png .jpg .jpeg .webp) before showing the placeholder
@@ -332,7 +330,7 @@ function openD(k){const d=D[k];
  mb.innerHTML='<div class="meta">'+d.m+'</div><h2>'+d.t+'</h2><p>'+d.s+'</p>'
  +(d.p?'<h4>Details</h4><ul class="list">'+d.p.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'')+chips(d.tags)
  +(d.video?'<h4>Video demo</h4>'+vid(d.video):'')
- +(d.img&&d.img.length?'<h4>Photos</h4><div class="gal">'+d.img.map(th).join('')+'</div>':'')
+ +(d.img&&d.img.length?'<h4>Screenshots</h4><div class="gal">'+d.img.map(th).join('')+'</div>':'')
  +(d.links&&d.links.some(l=>l[1])?'<div class="btns">'+d.links.filter(l=>l[1]).map(l=>'<a class="btn primary" href="'+l[1]+'" target="_blank" rel="noopener"><svg class="i"><use href="#'+(l[0]==='GitHub'?'i-github':'i-ext')+'"/></svg> '+l[0]+'</a>').join('')+'</div>':'');
  mo.hidden=false;document.body.classList.add('lock')}
 function closeD(){mo.hidden=true;mb.innerHTML='';document.body.classList.remove('lock')}
