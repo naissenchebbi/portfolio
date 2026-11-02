@@ -42,11 +42,31 @@ h2{font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:36px;line-height:1.2}
 .btn:hover{transform:translateY(-3px)}
 .btn.primary{background:linear-gradient(90deg,var(--p1),var(--p2));color:#fff;border:none;box-shadow:0 8px 28px var(--glow)}
 
-/* PROFILE PHOTO — dark line removed, original glow kept */
-.photo{position:relative;width:min(340px,80%);aspect-ratio:1;margin:0 auto}
-.photo::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(from 0deg,var(--p1),var(--p2),var(--p3),var(--p1));animation:spin 8s linear infinite;filter:blur(2px)}
-.photo img{position:relative;width:100%;height:100%;object-fit:cover;border-radius:50%;border:none;outline:none;box-shadow:none;background:var(--bg2);display:block}
-@keyframes spin{to{transform:rotate(360deg)}}
+/* 3D BADGE */
+.badge-stage{display:flex;justify-content:center;position:relative}
+.hang{position:relative;width:min(290px,78vw);perspective:1100px;animation:drop 1.6s both}
+.strap{position:absolute;left:50%;bottom:calc(100% - 6px);width:30px;height:110vh;transform:translateX(-50%);background:repeating-linear-gradient(180deg,rgba(255,255,255,.07) 0 2px,transparent 2px 10px),linear-gradient(90deg,#6d45a8,#9B72CF 35%,#E7A4D7 65%,#9B72CF);box-shadow:inset 2px 0 0 rgba(255,255,255,.18),inset -2px 0 0 rgba(0,0,0,.25)}
+.swing,.tilt,.badge{transform-style:preserve-3d}
+.swing{transform-origin:50% 0;animation:swingIn 3.4s ease-in-out 1s both,idle 7s ease-in-out 4.4s infinite}
+.tilt{transition:transform .35s ease-out}
+.badge{position:relative;aspect-ratio:5/7.3}
+.badge::before,.badge::after{content:"";position:absolute;inset:0;border-radius:24px}
+.badge::before{background:#07040c;transform:translateZ(-8px)}
+.badge::after{background:#33224a;transform:translateZ(-4px)}
+.clip{position:absolute;left:50%;top:-18px;width:36px;height:32px;border-radius:7px 7px 11px 11px;background:linear-gradient(90deg,#8d83a3,#f1ebfa 45%,#8d83a3);box-shadow:0 3px 8px rgba(0,0,0,.4);transform:translateX(-50%) translateZ(6px);z-index:2}
+.clip::after{content:"";position:absolute;left:50%;bottom:6px;width:14px;height:6px;border-radius:99px;background:#17101F;transform:translateX(-50%)}
+.face{position:relative;height:100%;border-radius:24px;overflow:hidden;padding:18px 8% 0;background:linear-gradient(160deg,#2c1d40,#17101F 58%,#26153a);border:1px solid rgba(201,182,255,.28);box-shadow:0 30px 60px rgba(0,0,0,.45),0 0 50px var(--glow)}
+.face::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.22) 45%,transparent 60%);background-size:260% 100%;background-position:120% 0;animation:sheen 7s ease-in-out 4.4s infinite}
+.slot{width:24%;height:11px;margin:12px auto 14px;border-radius:99px;background:#05030a;box-shadow:inset 0 2px 3px #000,0 1px 0 rgba(255,255,255,.14)}
+.bphoto{width:100%;aspect-ratio:1/1.06;padding:3px;border-radius:16px;background:linear-gradient(135deg,var(--p3),var(--p2),var(--p1))}
+.bphoto img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:13px;display:block;background:var(--bg2)}
+.bname{margin-top:16px;text-align:center;color:#fff;font-weight:700;font-size:1.1rem;letter-spacing:.07em}
+.brole{margin-top:4px;text-align:center;color:var(--p2);font:500 .66rem 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase}
+.bcode{width:68%;height:26px;margin:16px auto 0;opacity:.5;background:repeating-linear-gradient(90deg,#E9DFF5 0 2px,transparent 2px 4px,#E9DFF5 4px 5px,transparent 5px 8px,#E9DFF5 8px 11px,transparent 11px 13px)}
+@keyframes drop{0%{transform:translateY(-110vh);animation-timing-function:cubic-bezier(.5,0,.9,.55)}55%{transform:translateY(26px);animation-timing-function:ease-out}72%{transform:translateY(-12px);animation-timing-function:ease-in-out}86%{transform:translateY(5px);animation-timing-function:ease-in-out}100%{transform:translateY(0)}}
+@keyframes swingIn{0%{transform:rotateZ(0) rotateY(0)}12%{transform:rotateZ(7deg) rotateY(12deg)}28%{transform:rotateZ(-5deg) rotateY(-9deg)}44%{transform:rotateZ(3.4deg) rotateY(6deg)}60%{transform:rotateZ(-2.2deg) rotateY(-4deg)}76%{transform:rotateZ(1.2deg) rotateY(2deg)}100%{transform:rotateZ(0) rotateY(0)}}
+@keyframes idle{0%,100%{transform:rotateZ(0) rotateY(0)}25%{transform:rotateZ(1.5deg) rotateY(3deg)}75%{transform:rotateZ(-1.5deg) rotateY(-3deg)}}
+@keyframes sheen{0%{background-position:120% 0}60%,100%{background-position:-30% 0}}
 
 .grid{display:grid;gap:22px}
 .about{grid-template-columns:1.4fr 1fr}
@@ -115,7 +135,7 @@ a.more:hover{transform:translateY(-2px)}
 
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
 .reveal.show{opacity:1;transform:none}
-@media(max-width:820px){.hero .wrap,.about{grid-template-columns:1fr}.photo{order:-1;width:min(240px,70%)}.links a:not(#theme){display:none}section{padding:70px 0}.mtrack .card{flex-basis:260px;width:260px}}
+@media(max-width:820px){.hero .wrap,.about{grid-template-columns:1fr}.badge-stage{order:-1}.links a:not(#theme){display:none}section{padding:70px 0}.mtrack .card{flex-basis:260px;width:260px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.mtrack .dup{display:none}}
 </style>
 </head>
@@ -155,7 +175,21 @@ a.more:hover{transform:translateY(-2px)}
       <a href="cv%20naissen%20chebbi%201.pdf" class="btn" target="_blank" rel="noopener">Download CV</a>
     </div>
   </div>
-  <div class="photo"><img src="photo.png" alt="Naïssen Chebbi"></div>
+  <div class="badge-stage">
+    <div class="hang">
+      <div class="strap"></div>
+      <div class="swing"><div class="tilt"><div class="badge">
+        <div class="clip"></div>
+        <div class="face">
+          <div class="slot"></div>
+          <div class="bphoto"><img src="photo.png" alt="Naïssen Chebbi"></div>
+          <div class="bname">NAÏSSEN CHEBBI</div>
+          <div class="brole">AI &amp; Data Science Engineering</div>
+          <div class="bcode"></div>
+        </div>
+      </div></div></div>
+    </div>
+  </div>
 </div></header>
 
 <main>
@@ -347,6 +381,13 @@ function openD(k){const d=D[k];
 function closeD(){mo.hidden=true;mb.innerHTML='';document.body.classList.remove('lock')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(b)openD(b.dataset.k);else if(e.target===mo||e.target.closest('#mx'))closeD()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeD()});
+
+// Badge tilt on mouse move
+(function(){const s=document.querySelector('.badge-stage'),t=document.querySelector('.tilt');
+ if(!s||!t||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+ s.addEventListener('pointermove',e=>{const r=s.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.transform='rotateY('+(x*22)+'deg) rotateX('+(-y*14)+'deg)'});
+ s.addEventListener('pointerleave',()=>{t.style.transform=''});
+})();
 
 // Scroll reveal
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.15});
