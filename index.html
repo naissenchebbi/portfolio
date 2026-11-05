@@ -172,7 +172,7 @@ a.more:hover{transform:translateY(-2px)}
     <div class="btns">
       <a href="#projects" class="btn primary">View my projects</a>
       <a href="#contact" class="btn">Contact me</a>
-      <a href="cv%20naissen%20chebbi%201.pdf" class="btn" target="_blank" rel="noopener">Download CV</a>
+      <a href="naissen-chebbi.pdf" class="btn" target="_blank" rel="noopener">Download CV</a>
     </div>
   </div>
   <div class="badge-stage">
@@ -258,7 +258,7 @@ a.more:hover{transform:translateY(-2px)}
   <p>Open to collaborations and interesting AI projects. Feel free to reach out.</p>
   <div class="btns" style="justify-content:center">
     <a class="btn primary" href="mailto:nchebbi755@gmail.com">Send an email</a>
-    <a class="btn" href="cv%20naissen%20chebbi%201.pdf" target="_blank" rel="noopener">Download CV</a>
+    <a class="btn" href="naissen-chebbi.pdf" target="_blank" rel="noopener">Download CV</a>
     <a class="btn" href="https://github.com/naissenchebbi" target="_blank" rel="noopener">GitHub</a>
     <a class="btn" href="https://www.linkedin.com/in/nayssen-chebbi-3a9a1a269/" target="_blank" rel="noopener">LinkedIn</a>
   </div>
@@ -288,15 +288,19 @@ const el=document.getElementById('typing');let w=0,c=0,del=false;
 /* ===== EDIT YOUR CONTENT HERE =====
    c: exp | proj | lead | cert | event   m: subtitle   t: title   s: short summary on the card
    tags: tool chips   p: detail bullets (shown in the popup)
+   cover: image shown on the card (optional)
    img: screenshots/photos (put the files in an "images" folder; the first one is the card thumbnail)
+   groups: screenshots split in titled groups [["Title",["images/a.png","images/b.png"]], ...] (optional)
    video: video file (e.g. 'videos/demo.mp4') or a YouTube embed link
    links: [["GitHub","https://github.com/..."],["Live demo","https://..."]]  (empty url = hidden)
    RULE: every entry ends with "}," except the very last one. Every text must be inside quotes '...'
    RULE: inside img:[ ... ] every path is separated by a comma */
 const D={
-acc:{c:'exp',m:'Internship · Aug–Sep 2026 · Tunisia',t:'Workplace Accident Reporting & Tracking Platform',s:'Smart web platform to report, track and analyze workplace accidents, with real-time alerts and AI-assisted analysis.',tags:['Django REST','Next.js','PostgreSQL','JWT','Gemini API','SMTP','TunisieSMS API'],
- p:['Built a Django REST API with JWT authentication and a modern Next.js frontend.','Modeled the PostgreSQL database for incidents, users and follow-up actions.','Integrated SMTP and SMS notifications for real-time alerts.','Integrated the Gemini API for automatic incident analysis and corrective action suggestions.','Add more technical details here: architecture, challenges, results.'],
- img:['images/accident-1.png','images/accident-2.png'],links:[['GitHub',''],['Live demo','']]},
+acc:{c:'exp',m:'Internship · Aug–Sep 2026 · LEONI',t:'LEONI HSE Near-Miss Management Platform',s:'A multilingual HSE near-miss management platform built with Next.js, Django REST Framework and PostgreSQL. It streamlines incident reporting and corrective-action tracking, with Gemini-powered AI assistance and SMTP-based email notifications.',tags:['Next.js','React','Django REST','PostgreSQL','JWT','Gemini API','SMTP','SMS'],
+ p:['A web-based workplace safety platform for reporting, tracking and analyzing near-miss incidents. It connects employee reports with HSE workflows, helping teams identify hazards, coordinate corrective actions and improve safety practices across sites.','Architecture: Next.js and React frontend, Django REST Framework backend and PostgreSQL database. API access is protected with JWT authentication, and the interface supports multiple languages.','Employees can submit incident details, locations, dates and photos.','HSE administrators can review declarations, manage statuses, assign corrective actions and monitor activity through dashboards and reports.','AI assistance with the Google Gemini API: classification, summaries, suggested corrective and preventive actions, conversational assistance and translation.','Notifications: SMTP email for event-based alerts, with delivery attempts recorded in the system. SMS notifications are also supported through configurable providers.'],
+ cover:'images/admin1.png',
+ groups:[['Admin dashboard',['images/admin1.png','images/admin2.png','images/admin3.png']],['User dashboard',['images/nearmissformulaire1.png','images/nearmissformulaire2.png','images/nearmissformulaire3.png']]],
+ links:[['GitHub',''],['Live demo','']]},
 leoni2:{c:'exp',m:'Feb–May 2024 · LEONI Tunisie',t:'Full-Stack Developer Intern',s:'Web application for social service data management with real-time chat.',tags:['Angular','Spring Boot','Express.js','Socket.IO','MySQL'],
  p:['Developed a web application for social service data management, delivering efficient data processing.','Designed and implemented real-time chat with WebSockets.','Led the end-to-end development, front-end and back-end.','Add more technical details here.'],
  video:'videos/demo.mp4',
@@ -362,7 +366,7 @@ const chips=a=>a&&a.length?'<div class="tags">'+a.map(x=>'<span class="tag">'+x+
 const vid=u=>/youtube|youtu\.be|vimeo|loom/.test(u)?'<div class="vid"><iframe src="'+u+'" title="Demo video" allowfullscreen loading="lazy"></iframe></div>':'<div class="vid"><video controls preload="metadata" src="'+u+'"></video></div>';
 
 function card(k,d,dup){const g=(d.links||[]).find(l=>l[0]==='GitHub'&&l[1]);
- return '<article class="card'+(d.c==='event'?'':' reveal')+(dup?' dup':'')+'"'+(dup?' aria-hidden="true"':'')+'>'+(d.c!=='exp'&&d.img&&d.img[0]?th(d.img[0]):'')+'<div class="meta">'+d.m+'</div><h3>'+d.t+'</h3><p>'+d.s+'</p>'+(d.c==='cert'||d.c==='lead'||d.c==='event'?'':chips(d.tags))+'<div class="row"><button class="more" data-k="'+k+'"'+(dup?' tabindex="-1"':'')+'>'+(d.b||'View details')+' <svg class="i"><use href="#i-arrow"/></svg></button>'+(g?'<a class="more" href="'+g[1]+'" target="_blank" rel="noopener"'+(dup?' tabindex="-1"':'')+'><svg class="i"><use href="#i-github"/></svg> GitHub</a>':'')+'</div></article>'}
+ return '<article class="card'+(d.c==='event'?'':' reveal')+(dup?' dup':'')+'"'+(dup?' aria-hidden="true"':'')+'>'+(d.cover?th(d.cover):(d.c!=='exp'&&d.img&&d.img[0]?th(d.img[0]):''))+'<div class="meta">'+d.m+'</div><h3>'+d.t+'</h3><p>'+d.s+'</p>'+(d.c==='cert'||d.c==='lead'||d.c==='event'?'':chips(d.tags))+'<div class="row"><button class="more" data-k="'+k+'"'+(dup?' tabindex="-1"':'')+'>'+(d.b||'View details')+' <svg class="i"><use href="#i-arrow"/></svg></button>'+(g?'<a class="more" href="'+g[1]+'" target="_blank" rel="noopener"'+(dup?' tabindex="-1"':'')+'><svg class="i"><use href="#i-github"/></svg> GitHub</a>':'')+'</div></article>'}
 
 // Normal sections
 const evs=[];
@@ -378,7 +382,7 @@ function openD(k){const d=D[k];
  mb.innerHTML='<div class="meta">'+d.m+'</div><h2>'+d.t+'</h2><p>'+d.s+'</p>'
  +(d.p?'<h4>Details</h4><ul class="list">'+d.p.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'')+chips(d.tags)
  +(d.video?'<h4>Video demo</h4>'+vid(d.video):'')
- +(d.img&&d.img.length?'<h4>Screenshots</h4><div class="gal">'+d.img.map(th).join('')+'</div>':'')
+ +(d.groups?d.groups.map(g=>'<h4>'+g[0]+'</h4><div class="gal">'+g[1].map(th).join('')+'</div>').join(''):(d.img&&d.img.length?'<h4>Screenshots</h4><div class="gal">'+d.img.map(th).join('')+'</div>':''))
  +(d.links&&d.links.some(l=>l[1])?'<div class="btns">'+d.links.filter(l=>l[1]).map(l=>'<a class="btn primary" href="'+l[1]+'" target="_blank" rel="noopener"><svg class="i"><use href="#'+(l[0]==='GitHub'?'i-github':'i-ext')+'"/></svg> '+l[0]+'</a>').join('')+'</div>':'');
  mo.hidden=false;document.body.classList.add('lock')}
 function closeD(){mo.hidden=true;mb.innerHTML='';document.body.classList.remove('lock')}
