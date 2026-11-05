@@ -133,6 +133,12 @@ a.more:hover{transform:translateY(-2px)}
 .mtrack .thumb img{object-fit:contain;background:var(--bg2)}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
+/* experience cards: small image beside the text */
+.timeline .card:has(>.thumb){display:grid;grid-template-columns:210px 1fr;column-gap:26px;align-items:start}
+.timeline .card:has(>.thumb)>.thumb{grid-column:1;grid-row:1/span 6;margin:0}
+.timeline .card:has(>.thumb)>:not(.thumb){grid-column:2}
+@media(max-width:700px){.timeline .card:has(>.thumb){display:block}.timeline .card:has(>.thumb)>.thumb{margin-bottom:16px}}
+
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
 .reveal.show{opacity:1;transform:none}
 @media(max-width:820px){.hero .wrap,.about{grid-template-columns:1fr}.badge-stage{order:-1}.links a:not(#theme){display:none}section{padding:70px 0}.mtrack .card{flex-basis:260px;width:260px}}
@@ -290,7 +296,6 @@ const el=document.getElementById('typing');let w=0,c=0,del=false;
    tags: tool chips   p: detail bullets (shown in the popup)
    cover: image shown on the card (optional)
    img: screenshots/photos (put the files in an "images" folder; the first one is the card thumbnail)
-   groups: screenshots split in titled groups [["Title",["images/a.png","images/b.png"]], ...] (optional)
    video: video file (e.g. 'videos/demo.mp4') or a YouTube embed link
    links: [["GitHub","https://github.com/..."],["Live demo","https://..."]]  (empty url = hidden)
    RULE: every entry ends with "}," except the very last one. Every text must be inside quotes '...'
@@ -299,7 +304,7 @@ const D={
 acc:{c:'exp',m:'Internship · Aug–Sep 2026 · LEONI',t:'LEONI HSE Near-Miss Management Platform',s:'A multilingual HSE near-miss management platform built with Next.js, Django REST Framework and PostgreSQL. It streamlines incident reporting and corrective-action tracking, with Gemini-powered AI assistance and SMTP-based email notifications.',tags:['Next.js','React','Django REST','PostgreSQL','JWT','Gemini API','SMTP','SMS'],
  p:['A web-based workplace safety platform for reporting, tracking and analyzing near-miss incidents. It connects employee reports with HSE workflows, helping teams identify hazards, coordinate corrective actions and improve safety practices across sites.','Architecture: Next.js and React frontend, Django REST Framework backend and PostgreSQL database. API access is protected with JWT authentication, and the interface supports multiple languages.','Employees can submit incident details, locations, dates and photos.','HSE administrators can review declarations, manage statuses, assign corrective actions and monitor activity through dashboards and reports.','AI assistance with the Google Gemini API: classification, summaries, suggested corrective and preventive actions, conversational assistance and translation.','Notifications: SMTP email for event-based alerts, with delivery attempts recorded in the system. SMS notifications are also supported through configurable providers.'],
  cover:'images/admin1.png',
- groups:[['Admin dashboard',['images/admin1.png','images/admin2.png','images/admin3.png']],['User dashboard',['images/nearmissformulaire1.png','images/nearmissformulaire2.png','images/nearmissformulaire3.png']]],
+ img:['images/admin1.png','images/admin2.png','images/admin3.png','images/nearmissformulaire1.png','images/nearmissformulaire2.png','images/nearmissformulaire3.png'],
  links:[['GitHub',''],['Live demo','']]},
 leoni2:{c:'exp',m:'Feb–May 2024 · LEONI Tunisie',t:'Full-Stack Developer Intern',s:'Web application for social service data management with real-time chat.',tags:['Angular','Spring Boot','Express.js','Socket.IO','MySQL'],
  p:['Developed a web application for social service data management, delivering efficient data processing.','Designed and implemented real-time chat with WebSockets.','Led the end-to-end development, front-end and back-end.','Add more technical details here.'],
@@ -382,7 +387,7 @@ function openD(k){const d=D[k];
  mb.innerHTML='<div class="meta">'+d.m+'</div><h2>'+d.t+'</h2><p>'+d.s+'</p>'
  +(d.p?'<h4>Details</h4><ul class="list">'+d.p.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'')+chips(d.tags)
  +(d.video?'<h4>Video demo</h4>'+vid(d.video):'')
- +(d.groups?d.groups.map(g=>'<h4>'+g[0]+'</h4><div class="gal">'+g[1].map(th).join('')+'</div>').join(''):(d.img&&d.img.length?'<h4>Screenshots</h4><div class="gal">'+d.img.map(th).join('')+'</div>':''))
+ +(d.img&&d.img.length?'<h4>Screenshots</h4><div class="gal">'+d.img.map(th).join('')+'</div>':'')
  +(d.links&&d.links.some(l=>l[1])?'<div class="btns">'+d.links.filter(l=>l[1]).map(l=>'<a class="btn primary" href="'+l[1]+'" target="_blank" rel="noopener"><svg class="i"><use href="#'+(l[0]==='GitHub'?'i-github':'i-ext')+'"/></svg> '+l[0]+'</a>').join('')+'</div>':'');
  mo.hidden=false;document.body.classList.add('lock')}
 function closeD(){mo.hidden=true;mb.innerHTML='';document.body.classList.remove('lock')}
