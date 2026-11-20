@@ -109,10 +109,8 @@ button.more .i{transition:transform .2s}button.more:hover .i{transform:translate
 .gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:18px 0}.gal .thumb{margin:0}
 .sheet .btns{margin-top:18px}.sheet .btn{display:inline-flex;gap:8px;align-items:center}
 body.lock{overflow:hidden}
-.certs{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
 
 /* certificates, vouchers and photos are shown whole, not cropped */
-.certs .thumb img{object-fit:contain;background:var(--bg2)}
 #g-lead .thumb img{object-fit:contain;background:var(--bg2)}
 .gal .thumb{aspect-ratio:auto}
 .gal .thumb img{height:auto;object-fit:contain;background:var(--bg2)}
@@ -124,14 +122,20 @@ a.more:hover{transform:translateY(-2px)}
 .vid{aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#000;margin:6px 0 10px}
 .vid video,.vid iframe{width:100%;height:100%;border:0;display:block}
 
-/* EVENTS CAROUSEL — one line, auto-moving, pauses on hover */
-.marquee{overflow:hidden;padding:16px 0 22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.mtrack{display:flex;width:max-content;animation:marquee var(--dur,70s) linear infinite}
-.marquee:hover .mtrack,.marquee:focus-within .mtrack{animation-play-state:paused}
+/* CAROUSELS (events + certificates): auto-moving, but also scrollable by hand
+   - mouse: drag, or shift+wheel / trackpad swipe
+   - touch: swipe
+   - hovering or touching pauses the auto-scroll */
+.marquee{overflow-x:auto;overflow-y:hidden;padding:16px 0 22px;scrollbar-width:none;-ms-overflow-style:none;cursor:grab;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.marquee::-webkit-scrollbar{display:none}
+.marquee.grab{cursor:grabbing;user-select:none;-webkit-user-select:none}
+.marquee.grab *{pointer-events:none}
+.mtrack{display:flex;width:max-content}
 .mtrack .card{flex:0 0 300px;width:300px;margin-right:22px;display:flex;flex-direction:column}
 .mtrack .card .row{margin-top:auto;padding-top:10px}
 .mtrack .thumb img{object-fit:contain;background:var(--bg2)}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mtrack .thumb img{-webkit-user-drag:none;user-select:none}
+.cert-wrap{margin-top:34px}
 
 /* experience cards: small image beside the text */
 .timeline .card:has(>.thumb){display:grid;grid-template-columns:210px 1fr;column-gap:26px;align-items:start}
@@ -139,10 +143,22 @@ a.more:hover{transform:translateY(-2px)}
 .timeline .card:has(>.thumb)>:not(.thumb){grid-column:2}
 @media(max-width:700px){.timeline .card:has(>.thumb){display:block}.timeline .card:has(>.thumb)>.thumb{margin-bottom:16px}}
 
+/* LEADERSHIP: smaller boxes, 4 per line (2 lines) */
+#g-lead{grid-template-columns:repeat(4,1fr);gap:16px}
+#g-lead .card{padding:16px;border-radius:16px}
+#g-lead .card:hover{transform:translateY(-4px)}
+#g-lead .card h3{font-size:.98rem;margin:4px 0 6px;line-height:1.3}
+#g-lead .card p{font-size:.82rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+#g-lead .meta{font-size:.66rem;line-height:1.4}
+#g-lead .thumb{aspect-ratio:16/10;margin-bottom:10px;border-radius:10px}
+#g-lead button.more{font-size:.8rem;margin-top:4px}
+@media(max-width:980px){#g-lead{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){#g-lead{grid-template-columns:1fr}}
+
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
 .reveal.show{opacity:1;transform:none}
 @media(max-width:820px){.hero .wrap,.about{grid-template-columns:1fr}.badge-stage{order:-1}.links a:not(#theme){display:none}section{padding:70px 0}.mtrack .card{flex-basis:260px;width:260px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.mtrack .dup{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.marquee{-webkit-mask-image:none;mask-image:none}.mtrack .dup{display:none}}
 </style>
 </head>
 <body>
@@ -229,20 +245,25 @@ a.more:hover{transform:translateY(-2px)}
   <div class="eyebrow">04 — Skills</div><h2>My <span class="grad">toolbox</span></h2>
   <div class="skills">
     <div class="card reveal"><h3>Languages</h3><div class="tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C / C++</span><span class="tag">JavaScript / TypeScript</span><span class="tag">PHP</span><span class="tag">C# / .NET</span></div></div>
-    <div class="card reveal"><h3>Data &amp; AI</h3><div class="tags"><span class="tag">LLMs</span><span class="tag">RAG</span><span class="tag">NLP</span><span class="tag">Computer Vision</span><span class="tag">Embeddings</span><span class="tag">Vector search</span><span class="tag">Scikit-learn</span><span class="tag">TensorFlow / Keras</span></div></div>    <div class="card reveal"><h3>Data science &amp; MLOps</h3><div class="tags"><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">FastAPI</span><span class="tag">Django</span><span class="tag">CI/CD</span><span class="tag">Model deployment</span></div></div>
-    <div class="card reveal"><h3>Web &amp; Mobile</h3><div class="tags"><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">Angular</span><span class="tag">Node.js</span><span class="tag">Django</span><span class="tag">Spring</span><span class="tag">Symfony</span><span class="tag">Flutter</span></div></div>    <div class="card reveal"><h3>Databases &amp; DevOps</h3><div class="tags"><span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">SQL Server</span><span class="tag">MongoDB</span><span class="tag">Vector databases</span><span class="tag">Docker</span><span class="tag">GitLab CI</span></div></div>    <div class="card reveal"><h3>Tools</h3><div class="tags"><span class="tag">Git / GitHub</span><span class="tag">Postman</span><span class="tag">Jupyter</span><span class="tag">Scrum</span><span class="tag">UML</span><span class="tag">Figma</span></div></div>
+    <div class="card reveal"><h3>Data &amp; AI</h3><div class="tags"><span class="tag">LLMs</span><span class="tag">RAG</span><span class="tag">NLP</span><span class="tag">Computer Vision</span><span class="tag">Embeddings</span><span class="tag">Vector search</span><span class="tag">Scikit-learn</span><span class="tag">TensorFlow / Keras</span></div></div>
+    <div class="card reveal"><h3>Data science &amp; MLOps</h3><div class="tags"><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Matplotlib</span><span class="tag">FastAPI</span><span class="tag">Django</span><span class="tag">CI/CD</span><span class="tag">Model deployment</span></div></div>
+    <div class="card reveal"><h3>Web &amp; Mobile</h3><div class="tags"><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">Angular</span><span class="tag">Node.js</span><span class="tag">Django</span><span class="tag">Spring</span><span class="tag">Symfony</span><span class="tag">Flutter</span></div></div>
+    <div class="card reveal"><h3>Databases &amp; DevOps</h3><div class="tags"><span class="tag">MySQL</span><span class="tag">PostgreSQL</span><span class="tag">SQL Server</span><span class="tag">MongoDB</span><span class="tag">Vector databases</span><span class="tag">Docker</span><span class="tag">GitLab CI</span></div></div>
+    <div class="card reveal"><h3>Tools</h3><div class="tags"><span class="tag">Git / GitHub</span><span class="tag">Postman</span><span class="tag">Jupyter</span><span class="tag">Scrum</span><span class="tag">UML</span><span class="tag">Figma</span></div></div>
   </div>
 </div></section>
 
-<section id="certifications"><div class="wrap">
-  <div class="eyebrow">05 — Education &amp; Certifications</div><h2>Learning &amp; <span class="grad">credentials</span></h2>
-  <div class="card reveal" style="margin-bottom:22px"><h3>Education</h3><ul class="list">
-    <li>Computer Engineering, Polytechnic School of Sousse (current)</li>
-    <li>Bachelor's in Computer Science (Multimedia), ISITCom Sousse, 2024</li>
-    <li>Baccalaureate in Experimental Sciences, 2021</li>
-  </ul></div>
-  <div class="grid certs" id="g-cert"></div>
-</div></section>
+<section id="certifications">
+  <div class="wrap">
+    <div class="eyebrow">05 — Education &amp; Certifications</div><h2>Learning &amp; <span class="grad">credentials</span></h2>
+    <div class="card reveal"><h3>Education</h3><ul class="list">
+      <li>Computer Engineering, Polytechnic School of Sousse (current)</li>
+      <li>Bachelor's in Computer Science (Multimedia), ISITCom Sousse, 2024</li>
+      <li>Baccalaureate in Experimental Sciences, 2021</li>
+    </ul></div>
+  </div>
+  <div class="marquee cert-wrap" id="m-cert"><div class="mtrack" id="g-cert"></div></div>
+</section>
 
 <section id="leadership"><div class="wrap">
   <div class="eyebrow">06 — Leadership</div><h2>Beyond the <span class="grad">code</span></h2>
@@ -253,7 +274,7 @@ a.more:hover{transform:translateY(-2px)}
   <div class="wrap">
     <div class="eyebrow">07 — Events</div><h2>Congresses &amp; <span class="grad">events</span></h2>
   </div>
-  <div class="marquee"><div class="mtrack" id="g-event"></div></div>
+  <div class="marquee" id="m-event"><div class="mtrack" id="g-event"></div></div>
 </section>
 
 <section id="contact" class="contact"><div class="wrap">
@@ -321,12 +342,39 @@ pulmo:{c:'proj',m:'Computer Vision · Medical imaging',t:'PulmoAI — AI-Powered
 psc:{c:'proj',m:'Socio-cultural project · Frada school',t:'PSC — Frada School Makeover',s:'Sponsorship-funded makeover of a school: renovated classroom, new equipment, a football court and two workshops. Graded 17.5/20.',tags:['Sponsoring','Fundraising','Teamwork','Workshops','Project management'],
  p:['Ran a sponsoring campaign to collect funds, then used them to improve the Frada school.','Redecorated the whole classroom: new paint, decorations and stickers, new keyboards, mouse pads and mice, and toys for the kids.','Created a football court for sports, added new paintings on the walls and repainted the doors.','Organized two workshops: first aid in partnership with the Tunisian Red Crescent (Croissant-Rouge Tunisien) and sustainable energy with IEEE ESSTHS.','Held an inauguration day and a booth presenting our work, then defended the project in a final soutenance: 17.5/20.'],
  img:['images/psc-1.png','images/psc-2.png','images/psc-3.png','images/psc-4.png'],links:[]},
-az900:{c:'cert',m:'2026',t:'Microsoft Azure Fundamentals (AZ-900)',s:'Cloud concepts and core Azure services.',b:'View certificate',p:['Add what you learned or the skills covered.'],img:['images/voucher.png','images/azure900.png'],links:[['Verify voucher','']]},
-r:{c:'cert',m:'2026',t:'Intermediate R',s:'Data manipulation and analysis with R.',b:'View certificate',p:['Add what you learned.'],img:['images/voucherInter.png','images/introductiontoR.png'],links:[['Verify voucher','']]},
-prob:{c:'cert',m:'2022',t:'Foundations of Probability in Python',s:'Probability fundamentals applied in Python.',b:'View certificate',p:['Add what you learned.'],img:['images/probabilty-certificate.png'],links:[['Verify voucher','']]},
-delf:{c:'cert',m:'2022',t:'DELF B2',s:'French language certification, level B2.',b:'View certificate',p:['Add details.'],img:['images/delf-certificate.png'],links:[]},
-cisco:{c:'cert',m:'Cisco Networking Academy',t:'Introduction à la cybersécurité',s:'Cybersecurity fundamentals: threats, attacks and how to protect data and systems.',b:'View certificate',p:['Add what you learned or the skills covered.'],img:['images/introcyber.png','images/introcybersecurity.png'],links:[['Verify badge','']]},
-intror:{c:'cert',m:'DataCamp',t:'Introduction to R',s:'R fundamentals: data types, vectors, data frames and basic analysis.',b:'View certificate',p:['Add what you learned or the skills covered.'],img:['images/voucherR.png','images/intermediate-R.png'],links:[['Verify certificate','']]},
+
+/* ---------- CERTIFICATES (shown in the moving carousel, opposite direction to events) ---------- */
+ai900:{c:'cert',m:'Microsoft · 2026',t:'Microsoft Azure AI Fundamentals (AI-900)',s:'AI workloads, machine learning, computer vision, NLP and generative AI on Azure.',b:'View certificate',
+ p:['AI Workloads & Responsible AI: identifying AI use cases and Microsoft\'s six ethical AI principles (fairness, reliability, privacy, inclusiveness, transparency, accountability).','Machine Learning Basics: core concepts like regression, classification, clustering, training/validation data, and Automated ML.','Computer Vision: image classification, object detection, optical character recognition (OCR), and facial analysis.','Natural Language Processing (NLP): sentiment analysis, key phrase extraction, translation, and speech recognition/synthesis.','Generative AI: how large language models (LLMs), prompts, and Azure OpenAI services work.'],
+ img:['images/voucher.png','images/azure900.png'],links:[['Verify voucher','']]},
+ibmrag:{c:'cert',m:'IBM',t:'Retrieval Augmented Generation for Enhanced AI',s:'How RAG grounds LLMs in external knowledge to give more accurate, up-to-date answers.',b:'View certificate',
+ p:['Learned how Retrieval-Augmented Generation connects an LLM to external data sources to produce more accurate, grounded and up-to-date answers.'],
+ img:['images/ibm%20rag.png'],links:[['Verify certificate','']]},
+seg:{c:'cert',m:'Coursera',t:'Deep Learning with PyTorch: Image Segmentation',s:'Building and training deep learning models in PyTorch to segment images.',b:'View certificate',
+ p:['Learned to build and train deep learning models with PyTorch to segment images at the pixel level.'],
+ img:['images/segmentation.png'],links:[['Verify certificate','']]},
+nlp365:{c:'cert',m:'365 DataScience',t:'NLP for AI',s:'Natural language processing fundamentals for building AI applications.',b:'View certificate',
+ p:['Gained an understanding of how machines process and analyze human language, and how NLP techniques power modern AI applications.'],
+ img:['images/nlp-for-ai.png'],links:[['Verify certificate','']]},
+agents365:{c:'cert',m:'365 DataScience',t:'Introduction to AI Agents and Agentic AI',s:'How AI agents plan, use tools and act autonomously to complete tasks.',b:'View certificate',
+ p:['Learned what AI agents and agentic AI are, and how autonomous agents reason, use tools and complete multi-step tasks.'],
+ img:['images/ai-agents.png'],links:[['Verify certificate','']]},
+cisco:{c:'cert',m:'Cisco Networking Academy',t:'Introduction à la cybersécurité',s:'Cybersecurity fundamentals: threats, attacks and how to protect data and systems.',b:'View certificate',
+ p:['Basics of being safe online.','The most common cyber threats, attacks and vulnerabilities.','How to protect ourselves online.'],
+ img:['images/introcyber.png','images/introcybersecurity.png'],links:[['Verify badge','']]},
+delf:{c:'cert',m:'2022',t:'DELF B2',s:'French language certification, level B2.',b:'View certificate',
+ p:['Speaking: I speak fluently and defend my opinions in debates.','Writing: I write structured essays, reports, and formal emails.','Reading: I understand complex articles and professional texts effortlessly.','Listening: I follow native-speed news, podcasts, and lectures.'],
+ img:['images/delf-certificate.png'],links:[]},
+prob:{c:'cert',m:'2022',t:'Foundations of Probability in Python',s:'Probability fundamentals applied in Python.',b:'View certificate',
+ p:['Gained a solid grasp of probability concepts and learned to apply them in Python to model uncertainty and random events.'],
+ img:['images/probabilty-certificate.png'],links:[['Verify voucher','']]},
+r:{c:'cert',m:'2026',t:'Intermediate R',s:'Data manipulation and analysis with R.',b:'View certificate',
+ p:['Gained the skills to manipulate, filter and summarize data in R at an intermediate level.'],
+ img:['images/voucherInter.png','images/introductiontoR.png'],links:[['Verify voucher','']]},
+intror:{c:'cert',m:'DataCamp',t:'Introduction to R',s:'R fundamentals: data types, vectors, data frames and basic analysis.',b:'View certificate',
+ p:['Learned the basics of R: data types, vectors, data frames and simple data analysis.'],
+ img:['images/voucherR.png','images/intermediate-R.png'],links:[['Verify certificate','']]},
+
 l1:{c:'lead',m:'IEEE ESSTHS Student Branch · 2025–2026',t:'Treasurer',s:'Managing the budget and finances of the student branch.',p:['Add your responsibilities, projects and results here.'],img:['images/lead-treasurer.png'],links:[]},
 l2:{c:'lead',m:'IAS TAM 3.0 Congress · 2023–2024',t:'Logistics Chief',s:'Leading the logistics of the congress.',p:['Add your responsibilities, team size and results here.'],img:['images/lead-tam.png'],links:[]},
 l3:{c:'lead',m:'IEEE ESSTHS Student Branch · 2022–2023',t:'Vice President, Business Department',s:'Led the business department of the branch.',p:['Add your responsibilities and results here.'],img:['images/lead-vp.png'],links:[]},
@@ -335,7 +383,6 @@ l5:{c:'lead',m:'IEEE · Member since 2022',t:'Active IEEE Member',s:'Active IEEE
 l6:{c:'lead',m:'IEEE Women in Engineering · ACT 4.0',t:'Active WIE Member',s:'Active member of IEEE WIE. Had the honor to pitch both the technical and the non-technical challenge at WIE ACT 4.0.',p:['Active member of IEEE Women in Engineering (WIE).','Had the honor to pitch both the technical and the non-technical challenge at WIE ACT 4.0.','Add the audience, the outcome and what you learned.'],img:['images/wiemember.png'],links:[]},
 l7:{c:'lead',m:'IEEE PES · TGM 3.0',t:'Logistics Chief',s:'Led the logistics of PES TGM 3.0.',p:['Logistics Chief of PES TGM 3.0.','Add your responsibilities, team size and results here.'],img:['images/events/pes-tgm-1.png','images/events/pes-tgm-certificate.png'],links:[]},
 l8:{c:'lead',m:'IEEE Tunisia · TSYP 11 · 2023',t:'Organizing Committee Member — TSYP 11',s:'Member of the Organizing Committee of the IEEE Tunisian Student and Young Professional Congress (TSYP 11).',p:['Member of the Organizing Committee (OC) of TSYP 11.','Add your responsibilities, team size and results here.'],img:['images/Nayssen-Chebbi-tsyp-11.jpg'],links:[]},
-l9:{c:'lead',m:'Organizing Committee',t:'Organizing Committee Member — Robots League 2.0 & 3.0',s:'Member of the Organizing Committee of Robots League 2.0 and 3.0.',p:['Member of the Organizing Committee (OC) of Robots League 2.0 and 3.0.','Add your responsibilities, team size and results here.'],img:[],links:[]},
 
 /* ---------- EVENTS (shown in the moving carousel) ---------- */
 ev_ai:{c:'event',m:'ARSI · Competition',t:'AI Night Challenge — 2nd Place',s:'Finalist team in the AI Night Challenge organized by ARSI. We finished in second place.',b:'View photos & certificate',p:['Competed as a team in the AI Night Challenge organized by ARSI.','Reached the final and won 2nd place.','Add the topic, your role and what the team built.'],img:['images/arsii.jpeg','images/ai-night-certificate.png'],links:[]},
@@ -352,7 +399,7 @@ ev_pes:{c:'event',m:'IEEE PES',t:'PES TGM 3.0 — Logistics Chief',s:'Logistics 
 ev_nxt:{c:'event',m:'2025',t:'NXT 2025',s:'Attended NXT 2025.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/nxt-1.png','images/events/nxt-certificate.png'],links:[]},
 ev_xtreem:{c:'event',m:'Participant',t:'Xtreem',s:'Participated in Xtreem.',b:'View photos & certificate',p:['Add the format, your role and the outcome.'],img:['images/xtreem.png','images/events/xtreem-certificate.png'],links:[]}
 };
-const G={exp:'g-exp',proj:'g-proj',lead:'g-lead',cert:'g-cert'};
+const G={exp:'g-exp',proj:'g-proj',lead:'g-lead'};
 
 // Images: if a file is not found, try the same name in lowercase / Capitalized and other extensions before showing the placeholder
 function ph(i){const d=document.createElement('div');d.className='ph';d.innerHTML='<svg class="i"><use href="#i-img"/></svg><span>'+(i.dataset.o||i.getAttribute('src'))+'</span>';i.replaceWith(d)}
@@ -363,21 +410,63 @@ function fb(i){if(!i.dataset.o)i.dataset.o=i.getAttribute('src');
  exts=['.png','.jpg','.jpeg','.webp','.PNG','.JPG','.JPEG'],
  nx=names.flatMap(n=>exts.map(e=>dir+n+e)).find(x=>!tried.includes(x));
  if(nx){tried.push(nx);i.dataset.tr=tried.join('|');i.src=nx}else ph(i)}
-const th=s=>'<div class="thumb"><img src="'+s+'" alt="" loading="lazy" onerror="fb(this)"></div>';
+const th=s=>'<div class="thumb"><img src="'+s+'" alt="" loading="lazy" draggable="false" onerror="fb(this)"></div>';
 const chips=a=>a&&a.length?'<div class="tags">'+a.map(x=>'<span class="tag">'+x+'</span>').join('')+'</div>':'';
 const vid=u=>/youtube|youtu\.be|vimeo|loom/.test(u)?'<div class="vid"><iframe src="'+u+'" title="Demo video" allowfullscreen loading="lazy"></iframe></div>':'<div class="vid"><video controls preload="metadata" src="'+u+'"></video></div>';
 
 function card(k,d,dup){const g=(d.links||[]).find(l=>l[0]==='GitHub'&&l[1]);
- return '<article class="card'+(d.c==='event'?'':' reveal')+(dup?' dup':'')+'"'+(dup?' aria-hidden="true"':'')+'>'+(d.cover?th(d.cover):(d.c!=='exp'&&d.img&&d.img[0]?th(d.img[0]):''))+'<div class="meta">'+d.m+'</div><h3>'+d.t+'</h3><p>'+d.s+'</p>'+(d.c==='cert'||d.c==='lead'||d.c==='event'?'':chips(d.tags))+'<div class="row"><button class="more" data-k="'+k+'"'+(dup?' tabindex="-1"':'')+'>'+(d.b||'View details')+' <svg class="i"><use href="#i-arrow"/></svg></button>'+(g?'<a class="more" href="'+g[1]+'" target="_blank" rel="noopener"'+(dup?' tabindex="-1"':'')+'><svg class="i"><use href="#i-github"/></svg> GitHub</a>':'')+'</div></article>'}
+ const carousel=d.c==='event'||d.c==='cert';
+ return '<article class="card'+(carousel?'':' reveal')+(dup?' dup':'')+'"'+(dup?' aria-hidden="true"':'')+'>'+(d.cover?th(d.cover):(d.c!=='exp'&&d.img&&d.img[0]?th(d.img[0]):''))+'<div class="meta">'+d.m+'</div><h3>'+d.t+'</h3><p>'+d.s+'</p>'+(d.c==='cert'||d.c==='lead'||d.c==='event'?'':chips(d.tags))+'<div class="row"><button class="more" data-k="'+k+'"'+(dup?' tabindex="-1"':'')+'>'+(d.b||'View details')+' <svg class="i"><use href="#i-arrow"/></svg></button>'+(g?'<a class="more" href="'+g[1]+'" target="_blank" rel="noopener"'+(dup?' tabindex="-1"':'')+'><svg class="i"><use href="#i-github"/></svg> GitHub</a>':'')+'</div></article>'}
 
 // Normal sections
-const evs=[];
-Object.entries(D).forEach(([k,d])=>{if(d.c==='event'){evs.push([k,d]);return}document.getElementById(G[d.c]).insertAdjacentHTML('beforeend',card(k,d))});
+const evs=[],certs=[];
+Object.entries(D).forEach(([k,d])=>{
+ if(d.c==='event'){evs.push([k,d]);return}
+ if(d.c==='cert'){certs.push([k,d]);return}
+ document.getElementById(G[d.c]).insertAdjacentHTML('beforeend',card(k,d))});
 
-// Events carousel: the cards are rendered twice so the loop is seamless
-const trk=document.getElementById('g-event');
-trk.innerHTML=evs.map(([k,d])=>card(k,d)).join('')+evs.map(([k,d])=>card(k,d,true)).join('');
-trk.style.setProperty('--dur',(evs.length*6)+'s'); // lower the 6 to make it faster, raise it to make it slower
+// Carousels: the cards are rendered twice so the loop is seamless
+const twice=a=>a.map(([k,d])=>card(k,d)).join('')+a.map(([k,d])=>card(k,d,true)).join('');
+document.getElementById('g-event').innerHTML=twice(evs);
+document.getElementById('g-cert').innerHTML=twice(certs);
+
+/* Auto-scrolling carousel that can also be scrolled by hand.
+   dir: 1 = moves left (forward), -1 = moves right (inverse). speed: pixels per second. */
+function autoScroll(box,dir,speed){
+ const trk=box.firstElementChild,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ let pos=0,last=null,hover=false,drag=false,resumeAt=0,init=false,moved=false,lx=0;
+ const half=()=>trk.scrollWidth/2;
+ const hold=()=>{resumeAt=performance.now()+2500};
+ box.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')hover=true});
+ box.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')hover=false});
+ box.addEventListener('wheel',hold,{passive:true});
+ box.addEventListener('touchstart',hold,{passive:true});
+ box.addEventListener('touchmove',hold,{passive:true});
+ box.addEventListener('touchend',hold,{passive:true});
+ box.addEventListener('keydown',hold);
+ // mouse drag to scroll
+ box.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;drag=true;moved=false;lx=e.clientX;box.classList.add('grab')});
+ addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lx;lx=e.clientX;if(Math.abs(dx)>0)moved=true;box.scrollLeft-=dx});
+ addEventListener('pointerup',()=>{if(!drag)return;drag=false;box.classList.remove('grab');pos=box.scrollLeft;hold()});
+ // a drag must not open a card
+ box.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
+ function tick(t){
+  if(last===null)last=t;
+  const dt=Math.min(.05,(t-last)/1000);last=t;
+  const h=half();
+  if(h>0){
+   if(!init){pos=dir<0?h:0;box.scrollLeft=pos;init=true}
+   if(hover||drag||t<resumeAt||reduce){pos=box.scrollLeft}
+   else{pos+=dir*speed*dt;box.scrollLeft=pos}
+   if(pos>=h){pos-=h;box.scrollLeft=pos}
+   else if(pos<=0){pos+=h;box.scrollLeft=pos}
+  }
+  requestAnimationFrame(tick)}
+ requestAnimationFrame(tick);
+}
+const SPEED=50; // pixels per second — same for both carousels. Raise to go faster.
+autoScroll(document.getElementById('m-event'),1,SPEED);   // events: normal direction
+autoScroll(document.getElementById('m-cert'),-1,SPEED);   // certificates: inverse direction
 
 const mo=document.getElementById('modal'),mb=document.getElementById('mb');
 function openD(k){const d=D[k];
