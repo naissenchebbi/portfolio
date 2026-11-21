@@ -389,6 +389,91 @@ section .tag{background:color-mix(in srgb,var(--p1) 16%,transparent);color:var(-
 
 @media(max-width:820px){.stat-grid,.flip-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.flip{height:210px}}
+
+/* ===== v3: logo, bento about, education timeline, badge tiles, coverflow ===== */
+.logo{display:inline-flex;align-items:center;gap:10px;background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--text)}
+.logo .mark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;font:700 .86rem 'Space Grotesk',sans-serif;letter-spacing:.03em;box-shadow:0 4px 18px var(--glow),inset 0 0 0 1px rgba(255,255,255,.25);transition:transform .3s}
+.logo:hover .mark{transform:rotate(-8deg) scale(1.06)}
+.logo .name{font-size:.95rem;font-weight:500;letter-spacing:.02em;color:var(--text)}
+@media(max-width:520px){.logo .name{display:none}}
+
+/* About: bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.bx{position:relative;overflow:hidden;padding:24px}
+.bx .lab{display:block;font:500 .68rem 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--p2);margin-bottom:12px}
+:root.light .bx .lab{color:var(--text);opacity:.65}
+.bx h3{font-size:1.2rem;margin:12px 0 0;line-height:1.3}
+.bx-bio{grid-column:span 4;grid-row:span 2;background:linear-gradient(145deg,color-mix(in srgb,var(--p1) 16%,transparent),var(--card))}
+.bx-bio .wm{position:absolute;right:-6px;bottom:-34px;font:800 9rem/1 'Space Grotesk',sans-serif;letter-spacing:-.06em;opacity:.09;pointer-events:none;background:linear-gradient(135deg,var(--p1),var(--p2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.bx-bio .big{font-size:clamp(1.15rem,2.2vw,1.55rem);line-height:1.4;color:var(--text);font-weight:500;margin-bottom:14px}
+.bx-bio p{max-width:62ch;position:relative}
+.bx-edu,.bx-focus,.bx-loc{grid-column:span 2}
+.bx-lang{grid-column:span 4}
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pills span{font:500 .8rem 'JetBrains Mono',monospace;padding:7px 13px;border-radius:999px;border:1px solid var(--border);background:color-mix(in srgb,var(--p1) 16%,transparent);animation:bob 4s ease-in-out infinite}
+.pills span:nth-child(2n){animation-delay:-1.3s}
+.pills span:nth-child(3n){animation-delay:-2.4s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.langs{display:grid;gap:14px}
+.lg{display:grid;grid-template-columns:84px 1fr auto;gap:14px;align-items:center;font-size:.92rem}
+.lg .bar{height:8px;border-radius:99px;background:color-mix(in srgb,var(--text) 10%,transparent);overflow:hidden}
+.lg .bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--p1),var(--p2));transition:width 1.4s cubic-bezier(.2,.8,.2,1) .3s}
+.bento.show .lg .bar i{width:var(--w)}
+.lg em{font:500 .72rem 'JetBrains Mono',monospace;color:var(--muted);font-style:normal;min-width:62px;text-align:right}
+.pin{display:flex;align-items:center;gap:12px}
+.pulse{width:12px;height:12px;border-radius:50%;background:var(--p2);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--p2) 60%,transparent)}100%{box-shadow:0 0 0 16px transparent}}
+.bx-loc b{display:block;font-size:1.5rem;line-height:1.2}
+.clock{font:500 .82rem 'JetBrains Mono',monospace;color:var(--muted);margin-top:10px}
+@media(max-width:820px){.bento{grid-template-columns:1fr}.bx-bio,.bx-edu,.bx-focus,.bx-lang,.bx-loc{grid-column:auto;grid-row:auto}.bx-bio .wm{font-size:6rem}}
+
+/* Education: horizontal timeline */
+.edu-lab{display:block;font:500 .72rem 'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--p2);margin-bottom:6px}
+.edu-tl{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:36px}
+.edu-tl::before,.edu-tl::after{content:"";position:absolute;top:11px;left:0;right:0;height:2px}
+.edu-tl::before{background:var(--border)}
+.edu-tl::after{background:linear-gradient(90deg,var(--p1),var(--p2));transform:scaleX(0);transform-origin:0 50%;transition:transform 1.8s cubic-bezier(.2,.8,.2,1) .2s}
+.edu-tl.show::after{transform:scaleX(1)}
+.edu-step{position:relative}
+.edu-step::before{content:"";position:absolute;top:-32px;left:0;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--p2);box-shadow:0 0 0 4px color-mix(in srgb,var(--p2) 20%,transparent);z-index:1}
+.edu-step.now::before{background:var(--p2);animation:ping 2s infinite}
+.edu-step b{font:500 .8rem 'JetBrains Mono',monospace;color:var(--p2);letter-spacing:.14em}
+.edu-step h3{font-size:1.05rem;margin:4px 0}
+.edu-step p{color:var(--muted);font-size:.88rem}
+@media(max-width:700px){.edu-tl{grid-template-columns:1fr;gap:26px;padding:0 0 0 32px}.edu-tl::before,.edu-tl::after{top:0;bottom:0;left:6px;right:auto;width:2px;height:auto}.edu-tl::after{transform:scaleY(0);transform-origin:50% 0}.edu-tl.show::after{transform:scaleY(1)}.edu-step::before{top:4px;left:-32px}}
+
+/* Leadership: compact badge tiles */
+#g-lead{grid-template-columns:repeat(4,1fr);gap:14px}
+#g-lead .card{display:grid;grid-template-columns:54px 1fr;column-gap:12px;align-items:center;padding:14px;min-height:88px;cursor:pointer;position:relative;overflow:hidden}
+#g-lead .card::before{content:"";position:absolute;top:0;left:50%;width:34px;height:5px;margin-left:-17px;border-radius:0 0 6px 6px;background:var(--border)}
+#g-lead .card .thumb{grid-row:1/span 2;width:54px;height:54px;aspect-ratio:1;margin:0;border-radius:50%;border:2px solid var(--p2)}
+#g-lead .card .thumb img{object-fit:cover}
+#g-lead .card .meta{grid-column:2;font-size:.6rem;line-height:1.35;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+#g-lead .card h3{grid-column:2;font-size:.92rem;line-height:1.25;margin:2px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#g-lead .card p{position:absolute;inset:0;margin:0;padding:14px;font-size:.76rem;line-height:1.45;background:color-mix(in srgb,var(--bg2) 95%,transparent);opacity:0;transition:opacity .25s;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+#g-lead .card:hover p,#g-lead .card:focus-visible p{opacity:1}
+#g-lead .card .row{display:none}
+@media(max-width:980px){#g-lead{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){#g-lead{grid-template-columns:1fr}}
+
+/* Experience: 3D focus carousel */
+#g-exp.cf{position:relative;display:grid;place-items:center;gap:0;perspective:1500px;overflow:hidden;padding:12px 0 18px;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;outline:none}
+#g-exp.cf:active{cursor:grabbing}
+.cf .slide{grid-area:1/1;width:min(760px,88%);transform:translateX(calc(var(--o,0)*50%)) rotateY(calc(var(--o,0)*-9deg)) scale(calc(1 - var(--a,0)*.15));opacity:calc(1 - var(--a,0)*.45);transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s;will-change:transform,opacity}
+.cf .slide:not(.active){cursor:pointer}
+.cf .card{padding:22px;margin:0}
+.cf .card h3{font-size:1.15rem}
+.cf .card p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cf .card:has(>.thumb){grid-template-columns:190px 1fr}
+.cf-ui{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:4px}
+.cf-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;display:grid;place-items:center;transition:transform .2s,border-color .2s,opacity .2s}
+.cf-btn:hover{border-color:var(--p2);transform:scale(1.08)}
+.cf-btn:disabled{opacity:.35;cursor:default;transform:none}
+.cf-btn.prev .i{transform:rotate(180deg)}
+.cf-dots{display:flex;gap:8px;align-items:center}
+.cf-dot{width:9px;height:9px;padding:0;border:0;border-radius:99px;background:color-mix(in srgb,var(--text) 25%,transparent);cursor:pointer;transition:width .35s,background .35s}
+.cf-dot.on{width:30px;background:linear-gradient(90deg,var(--p1),var(--p2))}
+.cf-count{font:500 .75rem 'JetBrains Mono',monospace;color:var(--muted);min-width:44px;text-align:center}
 </style>
 </head>
 
@@ -876,6 +961,96 @@ resize();addEventListener('resize',resize);
     g.globalAlpha=.25+.75*s;g.font='600 '+(11+s*10)+'px "JetBrains Mono",monospace';g.fillStyle=pal[p.c];
     g.fillText(p.w,W/2+p.x*R*1.9,H/2+p.y*R*1.05)});
    g.globalAlpha=1})();
+ })();
+})();
+
+/* ===== v3 UPGRADE: logo, creative About, education timeline, badge tiles, experience carousel ===== */
+(function(){
+ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,
+       fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+ const tilt=el=>{if(!fine||reduce)return;el.setAttribute('data-tilt','');
+  el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+   el.style.setProperty('--rx',((.5-py)*8).toFixed(2)+'deg');el.style.setProperty('--ry',((px-.5)*10).toFixed(2)+'deg');el.style.setProperty('--lift','-5px')});
+  el.addEventListener('pointerleave',()=>{el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg');el.style.setProperty('--lift','0px')})};
+
+ // 1) favicon (browser tab) + navigation logo
+ const svg="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#9B72CF'/><stop offset='1' stop-color='#E7A4D7'/></linearGradient></defs><rect width='64' height='64' rx='16' fill='#17101F'/><rect x='3' y='3' width='58' height='58' rx='14' fill='none' stroke='url(#g)' stroke-width='3'/><text x='32' y='43' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='27' fill='url(#g)'>NC</text></svg>";
+ document.querySelectorAll('link[rel~="icon"]').forEach(l=>l.remove());
+ const fav=document.createElement('link');fav.rel='icon';fav.type='image/svg+xml';fav.href='data:image/svg+xml,'+encodeURIComponent(svg);document.head.appendChild(fav);
+ const lg=document.querySelector('.logo');if(lg)lg.innerHTML='<span class="mark">NC</span><span class="name">Naïssen Chebbi</span>';
+
+ // 2) creative About (bento)
+ const old=document.querySelector('#about .about');
+ if(old){
+  const lv=[['Arabic','Native',100],['English','Fluent',90],['French','DELF B2',75],['German','Beginner',25]];
+  const bento=document.createElement('div');bento.className='bento reveal';
+  bento.innerHTML=`
+  <div class="card bx bx-bio"><span class="wm" aria-hidden="true">NC</span><span class="lab">Profile</span>
+   <p class="big">Data Science &amp; AI Engineering student with hands-on experience in Machine Learning, NLP, LLMs and RAG.</p>
+   <p>I build AI-driven applications and full-stack solutions with FastAPI, Java/Spring Boot, React, Angular, REST APIs, SQL, Docker and CI/CD.</p>
+   <p style="margin-top:14px">I'm passionate about building practical, intelligent solutions to real-world problems.</p></div>
+  <div class="card bx bx-edu" style="--p1:#2DD4BF;--p2:#5EEAD4"><span class="lab">Education</span><span class="ico"><svg class="i"><use href="#i-cap"/></svg></span><h3>Polytechnic School of Sousse</h3></div>
+  <div class="card bx bx-focus" style="--p1:#FBBF24;--p2:#FB923C"><span class="lab">Focus</span><div class="pills"><span>ML</span><span>NLP</span><span>LLMs</span><span>RAG</span><span>MLOps</span></div></div>
+  <div class="card bx bx-lang" style="--p1:#38BDF8;--p2:#818CF8"><span class="lab">Languages</span><div class="langs">${lv.map(l=>`<div class="lg"><span>${l[0]}</span><div class="bar"><i style="--w:${l[2]}%"></i></div><em>${l[1]}</em></div>`).join('')}</div></div>
+  <div class="card bx bx-loc" style="--p1:#FB7185;--p2:#F472B6"><span class="lab">Based in</span><div class="pin"><i class="pulse"></i><b>Tunisia</b></div><div class="clock"></div></div>`;
+  old.replaceWith(bento);io.observe(bento);bento.querySelectorAll('.bx').forEach(tilt);
+  const clk=bento.querySelector('.clock');
+  const tick=()=>{try{clk.textContent='Local time · '+new Date().toLocaleTimeString('en-GB',{timeZone:'Africa/Tunis',hour:'2-digit',minute:'2-digit',second:'2-digit'})}catch(e){}};
+  tick();setInterval(tick,1000);
+ }
+
+ // 3) education as a horizontal timeline
+ const cw=document.querySelector('#certifications .wrap'),ec=cw&&cw.querySelector('.card');
+ if(ec){
+  const w=document.createElement('div');w.className='edu-wrap';
+  w.innerHTML=`<span class="edu-lab">Education</span><div class="edu-tl reveal">
+   <div class="edu-step"><b>2021</b><h3>Baccalaureate</h3><p>Experimental Sciences</p></div>
+   <div class="edu-step"><b>2024</b><h3>Bachelor's in Computer Science</h3><p>Multimedia · ISITCom Sousse</p></div>
+   <div class="edu-step now"><b>Now</b><h3>Computer Engineering</h3><p>Polytechnic School of Sousse (current)</p></div></div>`;
+  ec.replaceWith(w);io.observe(w.querySelector('.edu-tl'));
+ }
+
+ // 4) leadership tiles: whole tile is clickable
+ document.querySelectorAll('#g-lead .card').forEach(c=>{
+  const b=c.querySelector('[data-k]');if(!b)return;
+  c.tabIndex=0;c.setAttribute('role','button');
+  c.addEventListener('click',e=>{if(!e.target.closest('[data-k]'))openD(b.dataset.k)});
+  c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openD(b.dataset.k)}});
+ });
+
+ // 5) experience: 3D focus carousel
+ (function(){
+  const g=document.getElementById('g-exp');if(!g)return;
+  const cards=[...g.children].filter(c=>c.classList.contains('card'));
+  if(cards.length<2)return;
+  g.classList.add('cf');g.tabIndex=0;g.setAttribute('aria-roledescription','carousel');
+  const slides=cards.map(c=>{const s=document.createElement('div');s.className='slide';c.classList.remove('reveal');c.classList.add('show');g.appendChild(s);s.appendChild(c);return s});
+  const ui=document.createElement('div');ui.className='cf-ui';
+  ui.innerHTML='<button class="cf-btn prev" aria-label="Previous"><svg class="i"><use href="#i-arrow"/></svg></button><div class="cf-dots">'+slides.map((_,i)=>'<button class="cf-dot" aria-label="Go to '+(i+1)+'"></button>').join('')+'</div><span class="cf-count"></span><button class="cf-btn next" aria-label="Next"><svg class="i"><use href="#i-arrow"/></svg></button>';
+  g.after(ui);
+  const prev=ui.querySelector('.prev'),next=ui.querySelector('.next'),dots=[...ui.querySelectorAll('.cf-dot')],cnt=ui.querySelector('.cf-count');
+  let a=0;
+  function render(){
+   slides.forEach((s,i)=>{const o=i-a,ab=Math.abs(o);
+    s.style.setProperty('--o',o);s.style.setProperty('--a',ab);s.style.zIndex=20-ab;
+    s.classList.toggle('active',!o);s.style.pointerEvents=ab>2?'none':'auto';
+    s.setAttribute('aria-hidden',o?'true':'false');
+    s.querySelectorAll('button,a').forEach(b=>b.tabIndex=o?-1:0)});
+   dots.forEach((d,i)=>d.classList.toggle('on',i===a));
+   prev.disabled=a===0;next.disabled=a===slides.length-1;
+   cnt.textContent=(a+1)+' / '+slides.length}
+  function go(i){a=Math.max(0,Math.min(slides.length-1,i));render()}
+  prev.onclick=()=>go(a-1);next.onclick=()=>go(a+1);
+  dots.forEach((d,i)=>d.onclick=()=>go(i));
+  g.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(a+1);if(e.key==='ArrowLeft')go(a-1)});
+  slides.forEach((s,i)=>s.addEventListener('click',e=>{if(i!==a){e.preventDefault();e.stopPropagation();go(i)}},true));
+  let sx=null,moved=false;
+  g.addEventListener('pointerdown',e=>{sx=e.clientX;moved=false});
+  g.addEventListener('pointermove',e=>{if(sx!==null&&Math.abs(e.clientX-sx)>10)moved=true});
+  g.addEventListener('pointerup',e=>{if(sx===null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)>45)go(a+(dx<0?1:-1))});
+  g.addEventListener('pointercancel',()=>{sx=null});
+  g.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
+  render();
  })();
 })();
 </script>
