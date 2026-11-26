@@ -117,12 +117,11 @@ a.more{display:inline-flex;gap:8px;align-items:center;color:var(--p2);font-weigh
 a.more:hover{transform:translateY(-2px)}
 .vid{aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:#000;margin:6px 0 10px}
 .vid video,.vid iframe{width:100%;height:100%;border:0;display:block}
-.marquee{overflow-x:auto;overflow-y:hidden;padding:16px 0 22px;scrollbar-width:none;-ms-overflow-style:none;cursor:grab;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.marquee{overflow-x:auto;overflow-y:hidden;padding:16px 0 22px;scrollbar-width:none;-ms-overflow-style:none;cursor:grab;user-select:none;-webkit-user-select:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
 .marquee::-webkit-scrollbar{display:none}
-.marquee.grab{cursor:grabbing;user-select:none;-webkit-user-select:none}
-.marquee.grab *{pointer-events:none}
+.marquee.grab{cursor:grabbing}
 .mtrack{display:flex;width:max-content}
-.mtrack .card{flex:0 0 300px;width:300px;margin-right:22px;display:flex;flex-direction:column}
+.mtrack .card{flex:0 0 300px;width:300px;margin-right:22px;display:flex;flex-direction:column;cursor:pointer}
 .mtrack .card .row{margin-top:auto;padding-top:10px}
 .mtrack .thumb img{object-fit:contain;background:var(--bg2)}
 .mtrack .thumb img{-webkit-user-drag:none;user-select:none}
@@ -319,24 +318,24 @@ section .tag{background:color-mix(in srgb,var(--p1) 16%,transparent);color:var(-
 .cf-dot.on{width:30px;background:linear-gradient(90deg,var(--p1),var(--p2))}
 .cf-count{font:500 .75rem 'JetBrains Mono',monospace;color:var(--muted);min-width:44px;text-align:center}
 
-/* ===== Skills: 3D layer stack ===== */
+/* ===== Skills: 3D box stack ===== */
 .skills-ui{display:grid;grid-template-columns:.85fr 1.15fr;gap:30px;align-items:center}
 .stack3d{position:relative;height:410px;perspective:1300px;display:grid;place-items:center}
-.stk{position:relative;width:240px;height:240px;transform-style:preserve-3d;transform:rotateX(62deg) rotateZ(24deg) translateY(54px);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-.stack3d:hover .stk{transform:rotateX(57deg) rotateZ(40deg) translateY(54px)}
-.layer{position:absolute;inset:0;padding:0;border:1px solid color-mix(in srgb,var(--c1) 75%,#fff);border-radius:50%;cursor:pointer;color:#fff;font:700 2rem 'JetBrains Mono',monospace;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--c1) 60%,transparent),color-mix(in srgb,var(--c2) 38%,transparent) 72%),repeating-radial-gradient(circle,transparent 0 13px,rgba(255,255,255,.08) 13px 14px);transform:translateZ(calc(var(--i)*42px)) translateX(var(--sx,0px));transform-style:preserve-3d;box-shadow:0 0 24px color-mix(in srgb,var(--c1) 28%,transparent);transition:transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .4s,filter .4s}
-.layer::before,.layer::after{content:"";position:absolute;inset:-1px;border-radius:50%;background:color-mix(in srgb,var(--c1) 50%,#000);transform:translateZ(-5px);z-index:-1}
-.layer::after{transform:translateZ(-10px);background:color-mix(in srgb,var(--c1) 35%,#000)}
-.layer span{text-shadow:0 0 14px var(--c1)}
+.stk{position:relative;width:230px;height:230px;transform-style:preserve-3d;transform:rotateX(60deg) rotateZ(45deg) translateY(66px);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.stack3d:hover .stk{transform:rotateX(56deg) rotateZ(54deg) translateY(66px)}
+.layer{--gap:42px;position:absolute;inset:0;display:block;padding:0;text-align:left;cursor:pointer;color:#fff;border:1px solid color-mix(in srgb,var(--c1) 80%,#fff);border-radius:18px;background:radial-gradient(circle,rgba(255,255,255,.26) 1.3px,transparent 1.8px) 0 0/17px 17px,linear-gradient(135deg,color-mix(in srgb,var(--c1) 58%,transparent),color-mix(in srgb,var(--c2) 34%,transparent));transform:translateZ(calc(var(--i)*var(--gap))) translateX(var(--sx,0px));transform-style:preserve-3d;box-shadow:0 0 26px color-mix(in srgb,var(--c1) 26%,transparent);transition:transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .4s,filter .4s}
+.layer::before,.layer::after{content:"";position:absolute;inset:-1px;border-radius:18px;background:color-mix(in srgb,var(--c1) 52%,#000);transform:translateZ(-6px);z-index:-1}
+.layer::after{transform:translateZ(-12px);background:color-mix(in srgb,var(--c1) 34%,#000)}
+.layer span{position:absolute;left:16px;bottom:9px;font:700 .72rem 'JetBrains Mono',monospace;letter-spacing:.04em;white-space:nowrap;text-shadow:0 0 12px var(--c1),0 1px 2px rgba(0,0,0,.45);pointer-events:none}
 .layer:hover{--sx:14px;filter:brightness(1.15)}
-.layer.on{--sx:64px;box-shadow:0 0 46px var(--c1),0 0 0 2px var(--c1) inset;filter:brightness(1.25) saturate(1.2)}
+.layer.on{--sx:72px;box-shadow:0 0 46px var(--c1),inset 0 0 0 2px var(--c1);filter:brightness(1.25) saturate(1.2)}
 .stk.has .layer:not(.on){filter:saturate(.55) brightness(.8)}
 .stk.has .layer:not(.on):hover{filter:brightness(1.05)}
 .skills-panel{--c1:#2DD4BF;--c2:#38BDF8}
 .sk-hint{font:500 .72rem 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
 .sk-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
 .sk-tab{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;border:1px solid var(--border);background:var(--card);color:var(--text);font:600 .85rem 'Space Grotesk',sans-serif;cursor:pointer;text-align:left;line-height:1.25;transition:border-color .3s,background .3s,transform .2s}
-.sk-tab i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--d);box-shadow:0 0 10px var(--d)}
+.sk-tab i{flex:none;width:10px;height:10px;border-radius:3px;background:var(--d);box-shadow:0 0 10px var(--d)}
 .sk-tab:hover{transform:translateY(-2px)}
 .sk-tab.on{border-color:var(--d);background:color-mix(in srgb,var(--d) 14%,var(--card))}
 .sk-view{border:1px solid var(--border);border-radius:20px;padding:22px;background:var(--card);min-height:170px;position:relative;overflow:hidden}
@@ -346,7 +345,7 @@ section .tag{background:color-mix(in srgb,var(--p1) 16%,transparent);color:var(-
 .sk-tags{display:flex;flex-wrap:wrap;gap:10px}
 .sk-tags span{font:500 .82rem 'JetBrains Mono',monospace;padding:7px 14px;border-radius:999px;border:1px solid color-mix(in srgb,var(--c1) 55%,transparent);background:color-mix(in srgb,var(--c1) 16%,transparent);animation:tagIn .45s both}
 @keyframes tagIn{from{opacity:0;transform:translateY(10px) scale(.92)}to{opacity:1;transform:none}}
-@media(max-width:900px){.skills-ui{grid-template-columns:1fr}.stack3d{height:300px}.stk{width:190px;height:190px}}
+@media(max-width:900px){.skills-ui{grid-template-columns:1fr}.stack3d{height:340px}.stk{width:180px;height:180px;transform:rotateX(60deg) rotateZ(45deg) translateY(38px)}.stack3d:hover .stk{transform:rotateX(56deg) rotateZ(54deg) translateY(38px)}.layer{--gap:32px}.layer span{font-size:.6rem;left:11px;bottom:7px}.layer.on{--sx:54px}}
 @media(max-width:520px){.sk-tabs{grid-template-columns:repeat(2,1fr)}}
 
 /* ===== Leadership: polaroid certificates ===== */
@@ -365,6 +364,15 @@ section .tag{background:color-mix(in srgb,var(--p1) 16%,transparent);color:var(-
 #g-lead .card p,#g-lead .card .row{display:none}
 @media(max-width:980px){#g-lead{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:420px){#g-lead{grid-template-columns:1fr}}
+
+/* ===== Contact: emails ===== */
+.mails{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:940px;margin:0 auto 28px}
+.mail{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:16px;border:1px solid var(--border);background:var(--card);backdrop-filter:blur(8px);text-align:left;min-width:0;transition:transform .25s,border-color .25s,box-shadow .25s}
+.mail:hover{transform:translateY(-4px);border-color:var(--p2);box-shadow:0 14px 34px var(--glow)}
+.mail>span:last-child{min-width:0}
+.mail small{display:block;font:500 .62rem 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--p2)}
+.mail b{display:block;font-size:.84rem;font-weight:500;line-height:1.4;overflow-wrap:anywhere}
+@media(max-width:820px){.mails{grid-template-columns:1fr}}
 </style>
 </head>
 
@@ -380,6 +388,7 @@ section .tag{background:color-mix(in srgb,var(--p1) 16%,transparent);color:var(-
 <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
 <symbol id="i-img" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></symbol>
 <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7.5l8 5.5 8-5.5"/></symbol>
 <symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
 </defs></svg>
 
@@ -398,7 +407,7 @@ section .tag{background:color-mix(in srgb,var(--p1) 16%,transparent);color:var(-
     <div class="eyebrow">AI &amp; Data Science Engineering</div>
     <h1>Hi, I'm <span class="grad">Naïssen Chebbi</span></h1>
     <div class="typing" id="typing"></div>
-    <p class="lead">Data Science &amp; AI & Data Science Engineering student and AI enthusiast, passionate about building intelligent solutions using Machine Learning, Computer Vision, NLP, and Generative AI — turning ideas into impactful applications..</p>
+    <p class="lead">AI &amp; Data Science Engineering student and AI enthusiast, passionate about building intelligent solutions using Machine Learning, Computer Vision, NLP, and Generative AI — turning ideas into impactful applications.</p>
     <div class="btns">
       <a href="#projects" class="btn primary">View my projects</a>
       <a href="#contact" class="btn">Contact me</a>
@@ -455,7 +464,7 @@ section .tag{background:color-mix(in srgb,var(--p1) 16%,transparent);color:var(-
   <div class="skills-ui">
     <div class="stack3d"><div class="stk" id="stk"></div></div>
     <div class="skills-panel">
-      <div class="sk-hint">Pick a layer to see its content</div>
+      <div class="sk-hint">Pick a box to see its content</div>
       <div class="sk-tabs" id="skTabs"></div>
       <div class="sk-view" id="skView"></div>
     </div>
@@ -489,9 +498,13 @@ section .tag{background:color-mix(in srgb,var(--p1) 16%,transparent);color:var(-
 <section id="contact" class="contact"><div class="wrap">
   <div class="eyebrow">08 — Contact</div><h2>Let's <span class="grad">connect</span></h2>
   <p>Open to collaborations and interesting AI projects. Feel free to reach out.</p>
+  <div class="mails">
+    <a class="mail" href="mailto:naissen.chebi@polytechnicien.tn"><span class="ico"><svg class="i"><use href="#i-mail"/></svg></span><span><small>University</small><b>naissen.chebi@polytechnicien.tn</b></span></a>
+    <a class="mail" href="mailto:nchebbi755@gmail.com"><span class="ico"><svg class="i"><use href="#i-mail"/></svg></span><span><small>Personal</small><b>nchebbi755@gmail.com</b></span></a>
+    <a class="mail" href="mailto:nchebbi755@ieee.org"><span class="ico"><svg class="i"><use href="#i-mail"/></svg></span><span><small>IEEE</small><b>nchebbi755@ieee.org</b></span></a>
+  </div>
   <div class="btns" style="justify-content:center">
-    <a class="btn primary" href="mailto:nchebbi755@gmail.com">Send an email</a>
-    <a class="btn" href="naissen-chebbi.pdf" target="_blank" rel="noopener">Download CV</a>
+    <a class="btn primary" href="naissen-chebbi.pdf" target="_blank" rel="noopener">Download CV</a>
     <a class="btn" href="https://github.com/naissenchebbi" target="_blank" rel="noopener">GitHub</a>
     <a class="btn" href="https://www.linkedin.com/in/nayssen-chebbi-3a9a1a269/" target="_blank" rel="noopener">LinkedIn</a>
   </div>
@@ -606,8 +619,8 @@ ev_tsyp13:{c:'event',m:'IEEE Tunisia · TSYP 13 . 2025 ',t:'TSYP 13',s:'Attended
 ev_tsyp12:{c:'event',m:'IEEE Tunisia · TSYP 12 . 2024 ',t:'TSYP 12',s:'Attended the IEEE Tunisian Student and Young Professional Congress.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/tsyp12.png','images/tsyp12-certificate.png'],links:[]},
 ev_tsyp11:{c:'event',m:'IEEE Tunisia · TSYP 11 , 2023',t:'TSYP 11 — ESSTHS Booth Chief',s:'Led the IEEE ESSTHS booth, was part of the 24/7 team and attended as a participant.',b:'View photos & certificate',p:['Booth chief of the IEEE ESSTHS booth.','Member of the 24/7 team.','Participant in the congress.','Also part of the Organizing Committee (see Leadership).','Add results, team size and photos.'],img:['images/Nayssen-Chebbi-particaption.jpg','images/Tsyp11-certificate.png'],links:[]},
 ev_tsypx:{c:'event',m:'IEEE Tunisia · TSYP X . 2022',t:'TSYP X',s:'Attended the IEEE Tunisian Student and Young Professional Congress .',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/tsypX.jpg','images/events/tsypx-certificate.png'],links:[]},
-ev_tam4:{c:'event',m:'IEEE IAS',t:'IAS TAM 3.0',s:'Attended IAS TAM 3.0. I was Logistics Chief of the 3.0 edition, see Leadership.)',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/iastamoc.jpeg','images/iastamoc2.jpeg'],links:[]},
-ev_pes:{c:'event',m:'IEEE PES',t:'PES TGM 3.0 — Logistics Chief',s:'Logistics Chief of PES TGM 3.0.',b:'View photos & certificate',p:['Logistics Chief of PES TGM 3.0.','Add your responsibilities, team size and results here.'],img:['images/pestgm.png'],links:['https://events.vtools.ieee.org/m/374568']},
+ev_tam4:{c:'event',m:'IEEE IAS',t:'IAS TAM 3.0',s:'Attended IAS TAM 3.0. I was Logistics Chief of the 3.0 edition, see Leadership.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/iastamoc.jpeg','images/iastamoc2.jpeg'],links:[]},
+ev_pes:{c:'event',m:'IEEE PES',t:'PES TGM 3.0 — Logistics Chief',s:'Logistics Chief of PES TGM 3.0.',b:'View photos & certificate',p:['Logistics Chief of PES TGM 3.0.','Add your responsibilities, team size and results here.'],img:['images/pestgm.png'],links:[['Event page','https://events.vtools.ieee.org/m/374568']]},
 ev_nxt:{c:'event',m:'2025',t:'NXT 2025',s:'Attended NXT 2025.',b:'View photos & certificate',p:['Add what you learned and your highlights.'],img:['images/events/nxt-1.png','images/events/nxt-certificate.png'],links:[]},
 ev_xtreem:{c:'event',m:'Participant',t:'Xtreem',s:'Participated in Xtreem.',b:'View photos & certificate',p:['Add the format, your role and the outcome.'],img:['images/xtreem.png','images/events/xtreem-certificate.png'],links:[]}
 };
@@ -667,10 +680,10 @@ document.getElementById('g-cert').innerHTML=twice(certs);
  });
 })();
 
-/* Auto-scrolling carousel */
+/* Auto-scrolling carousel (drag only starts after a 6px move, so clicks always work) */
 function autoScroll(box,dir,speed){
  const trk=box.firstElementChild,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
- let pos=0,last=null,hover=false,drag=false,resumeAt=0,init=false,moved=false,lx=0;
+ let pos=0,last=null,hover=false,down=false,drag=false,moved=false,resumeAt=0,init=false,sx=0,lx=0;
  const half=()=>trk.scrollWidth/2;
  const hold=()=>{resumeAt=performance.now()+2500};
  box.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')hover=true});
@@ -680,9 +693,13 @@ function autoScroll(box,dir,speed){
  box.addEventListener('touchmove',hold,{passive:true});
  box.addEventListener('touchend',hold,{passive:true});
  box.addEventListener('keydown',hold);
- box.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;drag=true;moved=false;lx=e.clientX;box.classList.add('grab')});
- addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-lx;lx=e.clientX;if(Math.abs(dx)>0)moved=true;box.scrollLeft-=dx});
- addEventListener('pointerup',()=>{if(!drag)return;drag=false;box.classList.remove('grab');pos=box.scrollLeft;hold()});
+ box.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;down=true;drag=false;moved=false;sx=lx=e.clientX});
+ addEventListener('pointermove',e=>{
+  if(!down)return;
+  if(!drag){if(Math.abs(e.clientX-sx)<6)return;drag=true;moved=true;box.classList.add('grab')}
+  const dx=e.clientX-lx;lx=e.clientX;box.scrollLeft-=dx});
+ const end=()=>{if(!down)return;down=false;if(drag){drag=false;box.classList.remove('grab');pos=box.scrollLeft;hold()}};
+ addEventListener('pointerup',end);addEventListener('pointercancel',end);
  box.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
  function tick(t){
   if(last===null)last=t;
@@ -711,7 +728,12 @@ function openD(k){const d=D[k];
  +(d.links&&d.links.some(l=>l[1])?'<div class="btns">'+d.links.filter(l=>l[1]).map(l=>'<a class="btn primary" href="'+l[1]+'" target="_blank" rel="noopener"><svg class="i"><use href="#'+(l[0]==='GitHub'?'i-github':'i-ext')+'"/></svg> '+l[0]+'</a>').join('')+'</div>':'');
  mo.hidden=false;document.body.classList.add('lock')}
 function closeD(){mo.hidden=true;mb.innerHTML='';document.body.classList.remove('lock')}
-document.addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(b)openD(b.dataset.k);else if(e.target===mo||e.target.closest('#mx'))closeD()});
+document.addEventListener('click',e=>{
+ if(e.target.closest('a'))return;
+ let b=e.target.closest('[data-k]');
+ if(!b){const c=e.target.closest('.mtrack .card');if(c)b=c.querySelector('[data-k]')}
+ if(b)openD(b.dataset.k);
+ else if(e.target===mo||e.target.closest('#mx'))closeD()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeD()});
 
 // Badge tilt on mouse move
@@ -799,7 +821,7 @@ resize();addEventListener('resize',resize);
  }
 })();
 
-/* ===== Skills: 3D layer stack ===== */
+/* ===== Skills: 3D box stack ===== */
 (function(){
  const SK=[
   ['Data & AI','#2DD4BF','#38BDF8',['LLMs','RAG','NLP','Computer Vision','Embeddings','Vector search','Scikit-learn','TensorFlow / Keras']],
@@ -811,7 +833,7 @@ resize();addEventListener('resize',resize);
  const stk=document.getElementById('stk'),tabs=document.getElementById('skTabs'),view=document.getElementById('skView'),panel=document.querySelector('.skills-panel');
  if(!stk)return;
  const n=SK.length;
- stk.innerHTML=SK.map((s,i)=>'<button class="layer" aria-label="'+s[0]+'" data-i="'+i+'" style="--c1:'+s[1]+';--c2:'+s[2]+';--i:'+(n-1-i)+'"><span>0'+(i+1)+'</span></button>').join('');
+ stk.innerHTML=SK.map((s,i)=>'<button class="layer" aria-label="'+s[0]+'" data-i="'+i+'" style="--c1:'+s[1]+';--c2:'+s[2]+';--i:'+(n-1-i)+'"><span>0'+(i+1)+' · '+s[0]+'</span></button>').join('');
  tabs.innerHTML=SK.map((s,i)=>'<button class="sk-tab" data-i="'+i+'" style="--d:'+s[1]+'"><i></i>'+s[0]+'</button>').join('');
  let cur=0,auto=true;
  function pick(i){cur=i;const s=SK[i];
